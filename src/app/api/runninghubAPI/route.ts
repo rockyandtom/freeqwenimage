@@ -72,26 +72,17 @@ export async function POST(request: NextRequest) {
         createdAt: new Date().toISOString()
       })
 
-      // 开始轮询任务状态
-      try {
-        console.log(`开始轮询任务状态，taskId: ${taskId}`)
-        const finalResult = await pollTaskStatus(taskId)
-        console.log('轮询完成，最终结果:', finalResult)
-        
-        return NextResponse.json({
-          success: true,
-          data: finalResult
-        })
-      } catch (pollError) {
-        console.error('轮询过程中发生错误:', pollError)
-        return NextResponse.json({
-          success: false,
-          error: '图像生成超时或失败',
-          details: pollError instanceof Error ? pollError.message : 'Unknown polling error',
+      // 任务提交成功，返回任务ID让前端轮询
+      console.log(`任务提交成功，taskId: ${taskId}`)
+      
+      return NextResponse.json({
+        success: true,
+        data: {
           taskId: taskId,
-          debugInfo: '任务已提交到RunningHub，但轮询状态时出现问题'
-        }, { status: 500 })
-      }
+          status: 'submitted',
+          message: '图像生成任务已提交，请等待处理完成'
+        }
+      })
       
     } else {
       throw new Error('Failed to submit task to RunningHub')

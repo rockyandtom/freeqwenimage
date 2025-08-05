@@ -58,6 +58,8 @@ export default function AIImageGenerator() {
     setGeneratedImage(null)
 
     try {
+      // 第一步：提交图像生成任务
+      console.log('提交图像生成任务...')
       const response = await fetch('/api/runninghubAPI', {
         method: 'POST',
         headers: {
@@ -71,65 +73,87 @@ export default function AIImageGenerator() {
       })
 
       const result = await response.json()
-      console.log('完整API响应:', result)
+      console.log('任务提交响应:', result)
 
       if (!response.ok) {
-        console.error('API响应错误:', result)
-        let errorMessage = result.error || 'Failed to generate image'
-        if (result.details) {
-          errorMessage += `\n详细信息: ${result.details}`
-        }
-        if (result.taskId) {
-          errorMessage += `\n任务ID: ${result.taskId}`
-        }
-        if (result.debugInfo) {
-          errorMessage += `\n调试信息: ${result.debugInfo}`
-        }
-        throw new Error(errorMessage)
+        throw new Error(result.error || 'Failed to submit generation task')
       }
 
-      if (result.success && result.data) {
-        console.log('API Response:', result.data)
+      if (result.success && result.data && result.data.taskId) {
+        const taskId = result.data.taskId
+        console.log(`任务提交成功，TaskID: ${taskId}，开始轮询状态...`)
         
-        // 检查返回的数据结构 - 尝试多种可能的路径获取imageUrl
-        let imageUrl = null
-        
-        if (result.data.imageUrl) {
-          imageUrl = result.data.imageUrl
-        } else if (result.data.status === 'completed' && result.data.imageUrl) {
-          imageUrl = result.data.imageUrl
-        } else if (result.data.url) {
-          imageUrl = result.data.url
-        } else if (result.data.image_url) {
-          imageUrl = result.data.image_url
-        } else if (result.data.result && result.data.result.imageUrl) {
-          imageUrl = result.data.result.imageUrl
-        } else if (result.data.result && result.data.result.url) {
-          imageUrl = result.data.result.url
-        } else if (result.data.output && result.data.output.imageUrl) {
-          imageUrl = result.data.output.imageUrl
-        } else if (result.data.output && result.data.output.url) {
-          imageUrl = result.data.output.url
-        }
-        
-        if (imageUrl) {
-          console.log('Found image URL:', imageUrl)
-          setGeneratedImage(imageUrl)
-        } else {
-          console.error('Complete API response for debugging:', JSON.stringify(result, null, 2))
-          setError(`图像生成完成但未收到图像URL。请检查控制台输出的完整API响应格式。状态: ${result.data.status || '未知'}`)
-        }
+        // 第二步：开始轮询任务状态
+        await pollTaskStatus(taskId)
       } else {
-        console.error('API response error:', result)
-        throw new Error(result.error || 'Image generation failed')
+        throw new Error('Invalid response from task submission')
       }
       
     } catch (error) {
       console.error("Generation failed:", error)
       setError(error instanceof Error ? error.message : 'Unknown error occurred')
-    } finally {
       setIsGenerating(false)
     }
+  }
+
+  // 轮询任务状态的函数
+  const pollTaskStatus = async (taskId: string) => {
+    const maxAttempts = 200 // 最多轮询200次
+    const delayMs = 3000 // 每3秒轮询一次
+    let attempt = 0
+
+    const poll = async (): Promise<void> => {
+      try {
+        attempt++
+        const elapsedMinutes = (attempt * delayMs) / 60000
+        console.log(`轮询任务状态 ${taskId}, 尝试 ${attempt}/${maxAttempts} (已等待 ${elapsedMinutes.toFixed(1)} 分钟)`)
+
+        const statusResponse = await fetch('/api/runninghubAPI/status', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({ taskId }),
+        })
+
+        const statusResult = await statusResponse.json()
+        console.log('状态检查响应:', statusResult)
+
+        if (statusResponse.ok && statusResult.success && statusResult.data) {
+          const { status, imageUrl } = statusResult.data
+
+          if (status === 'completed' && imageUrl) {
+            console.log('图像生成完成!', imageUrl)
+            setGeneratedImage(imageUrl)
+            setIsGenerating(false)
+            return
+          } else if (status === 'running' || status === 'unknown') {
+            // 继续轮询
+            if (attempt < maxAttempts) {
+              setTimeout(poll, delayMs)
+            } else {
+              throw new Error(`图像生成超时，已等待 ${(maxAttempts * delayMs) / 60000} 分钟`)
+            }
+          } else {
+            throw new Error(`任务处理失败，状态: ${status}`)
+          }
+        } else {
+          throw new Error(statusResult.error || '状态检查失败')
+        }
+      } catch (error) {
+        console.error(`轮询第 ${attempt} 次失败:`, error)
+        if (attempt < maxAttempts) {
+          console.log(`等待 ${delayMs}ms 后重试...`)
+          setTimeout(poll, delayMs)
+        } else {
+          setError(error instanceof Error ? error.message : 'Unknown polling error')
+          setIsGenerating(false)
+        }
+      }
+    }
+
+    // 开始轮询
+    poll()
   }
 
   return (
