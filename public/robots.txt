@@ -1,4 +1,25 @@
 User-agent: *
+Allow: /
+
+# 阻止抓取查询参数页面
 Disallow: /*?*q=
+Disallow: /*?*sort=
+Disallow: /*?*filter=
+
+# 阻止抓取法律和管理页面
 Disallow: /privacy-policy
 Disallow: /terms-of-service
+Disallow: /admin/
+Disallow: /api/
+
+# 允许抓取重要页面
+Allow: /
+Allow: /en/
+Allow: /zh/
+Allow: /docs/
+
+# 网站地图
+Sitemap: https://freeqwenimage.com/sitemap.xml
+
+# 抓取延迟 (可选)
+Crawl-delay: 1

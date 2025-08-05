@@ -2,8 +2,9 @@
   "name": "freeqwenimage",
   "version": "2.6.0",
   "private": true,
-  "author": "idoubi",
-  "homepage": "https://shipany.ai",
+  "author": "Free Qwen Image Team",
+  "description": "Free Qwen Image - AI-powered text-to-image generator based on Qwen model",
+  "homepage": "https://freeqwenimage.com",
   "scripts": {
     "dev": "cross-env NODE_NO_WARNINGS=1 next dev --turbopack",
     "build": "next build",

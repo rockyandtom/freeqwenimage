@@ -20,7 +20,7 @@
       "skipDelayDuration": 300,
       "items": [
         {
-          "title": "Generator",
+          "title": "AI Generator",
           "url": "/#ai_generator",
           "icon": "RiSparkling2Line",
           "trigger": "hover",
@@ -29,9 +29,9 @@
           "sideOffset": 4,
           "children": [
             {
-              "title": "Create Images",
+              "title": "Free Qwen Image Generator",
               "url": "/#ai_generator",
-              "description": "Free Qwen Image Generator"
+              "description": "Create stunning images with advanced AI"
             }
           ]
         },
@@ -59,7 +59,7 @@
         {
           "title": "Features",
           "url": "/#feature",
-          "icon": "RiApps2Line",
+          "icon": "RiStarLine",
           "trigger": "hover",
           "highlightOnHover": true,
           "align": "center",
@@ -68,28 +68,12 @@
             {
               "title": "Key Features",
               "url": "/#feature",
-              "description": "Everything you need to know"
-            }
-          ]
-        },
-        {
-          "title": "Gallery",
-          "url": "/#showcase",
-          "icon": "RiGalleryLine",
-          "trigger": "hover",
-          "highlightOnHover": true,
-          "align": "center",
-          "sideOffset": 4,
-          "children": [
-            {
-              "title": "Amazing Images",
-              "url": "/#showcase",
-              "description": "See what others created"
+              "description": "Explore all powerful features"
             },
             {
-              "title": "User Statistics",
+              "title": "Usage Statistics",
               "url": "/#stats",
-              "description": "Platform insights"
+              "description": "View platform insights"
             }
           ]
         },
@@ -124,9 +108,10 @@
     "show_badge": false
   },
   "ai_generator": {
-    "name": "ai_generator",
-    "title": "Free Qwen Image Generator",
-    "description": "Generate unlimited Qwen images with our advanced AI technology - completely free online Qwen image generator with no restrictions."
+    "name": "ai_generator"
+  },
+  "branding": {
+    "disabled": true
   },
   "introduce": {
     "name": "introduce",
@@ -158,27 +143,27 @@
     "name": "benefit",
     "title": "Why Choose Free Qwen Image Generator",
     "label": "Benefits",
-    "description": "Experience the most advanced free Qwen image generation with unmatched quality and unlimited access.",
+    "description": "We provide the most advanced AI image generation technology, completely free and easy to use.",
     "items": [
       {
-        "title": "Superior Qwen Image Quality",
-        "description": "Generate high-resolution, detailed Qwen images with advanced AI models that deliver professional results every time.",
+        "title": "Superior Image Quality",
+        "description": "Generated Qwen images feature exceptional detail, creativity, and artistic quality suitable for professional use.",
         "icon": "RiNextjsFill",
         "image": {
           "src": "/imgs/features/2.png"
         }
       },
       {
-        "title": "100% Free Qwen Image Creation",
-        "description": "Unlimited access to Qwen image generation without any subscriptions, credits, or hidden costs.",
+        "title": "Multiple Aspect Ratios",
+        "description": "Support for square, landscape, portrait, and custom ratio formats to meet different scenario needs.",
         "icon": "RiClapperboardAiLine",
         "image": {
           "src": "/imgs/features/3.png"
         }
       },
       {
-        "title": "Easy-to-Use Interface",
-        "description": "Simple and intuitive design makes creating Qwen images accessible to everyone, from beginners to professionals.",
+        "title": "User-Friendly Interface",
+        "description": "Intuitive design that allows anyone to easily create stunning Qwen images without technical skills.",
         "icon": "RiCodeFill",
         "image": {
           "src": "/imgs/features/4.png"
@@ -187,45 +172,8 @@
     ]
   },
   "usage": {
-    "disabled": true,
-    "name": "usage", 
-    "title": "How to Create Qwen Images",
-    "description": "Generate beautiful Qwen images in just three simple steps:",
-    "image": {
-      "src": "/imgs/features/1.png"
-    },
-    "image_position": "left",
-    "text_align": "center",
-    "items": [
-      {
-        "title": "Enter Your Prompt",
-        "description": "Describe the Qwen image you want to create with detailed text prompts for best results.",
-        "image": {
-          "src": "/imgs/features/5.png"
-        }
-      },
-      {
-        "title": "Choose Settings",
-        "description": "Select your preferred aspect ratio and optionally add negative prompts to refine your Qwen image.",
-        "image": {
-          "src": "/imgs/features/6.png"
-        }
-      },
-      {
-        "title": "Generate Qwen Image",
-        "description": "Click generate and watch as our AI creates your custom Qwen image in seconds.",
-        "image": {
-          "src": "/imgs/features/7.png"
-        }
-      },
-      {
-        "title": "Download & Share",
-        "description": "Save your generated Qwen image and share it with the world or use it for your projects.",
-        "image": {
-          "src": "/imgs/features/8.png"
-        }
-      }
-    ]
+    "name": "usage",
+    "disabled": true
   },
   "feature": {
     "name": "feature",
@@ -267,19 +215,19 @@
   "stats": {
     "name": "stats",
     "label": "Stats",
-    "title": "People Love Free Qwen Image Generator",
-    "description": "for creating amazing Qwen images effortlessly.",
+    "title": "Users Love Our Free Qwen Image Generator",
+    "description": "Because it's easy to use and delivers amazing results.",
     "icon": "FaRegHeart",
     "items": [
       {
-        "title": "Qwen Images Generated",
-        "label": "10M+",
-        "description": "And Counting"
+        "title": "Happy Users",
+        "label": "50K+",
+        "description": "Users"
       },
       {
-        "title": "Active Users",
-        "label": "50K+",
-        "description": "Daily"
+        "title": "Generated Images",
+        "label": "1M+",
+        "description": "Images"
       },
       {
         "title": "Average Generation Time",
@@ -289,62 +237,8 @@
     ]
   },
   "testimonial": {
-    "disabled": true,
     "name": "testimonial",
-    "label": "Testimonial",
-    "title": "What Users Say About Free Qwen Image Generator",
-    "description": "Hear from creators, artists, and professionals who use our free Qwen image generator daily.",
-    "icon": "GoThumbsup",
-    "items": [
-      {
-        "title": "Sarah Mitchell",
-        "label": "Digital Artist",
-        "description": "This free Qwen image generator is incredible! The quality of Qwen images I can create rivals expensive paid tools. It's become essential for my creative workflow.",
-        "image": {
-          "src": "/imgs/users/1.png"
-        }
-      },
-      {
-        "title": "Mike Rodriguez",
-        "label": "Marketing Designer",
-        "description": "I generate dozens of Qwen images daily for campaigns. The speed and quality are unmatched, and being completely free makes it perfect for our startup budget.",
-        "image": {
-          "src": "/imgs/users/2.png"
-        }
-      },
-      {
-        "title": "Emma Thompson",
-        "label": "Content Creator",
-        "description": "As a content creator, I need fresh visuals constantly. This Qwen image generator gives me unlimited creativity without any subscription fees!",
-        "image": {
-          "src": "/imgs/users/3.png"
-        }
-      },
-      {
-        "title": "Alex Chen",
-        "label": "Game Developer",
-        "description": "Perfect for concept art! I use it to generate Qwen images for character designs and environments. The different aspect ratios are exactly what I need.",
-        "image": {
-          "src": "/imgs/users/4.png"
-        }
-      },
-      {
-        "title": "Lisa Park",
-        "label": "Freelance Designer",
-        "description": "The quality of Qwen images this tool produces is professional-grade. My clients are amazed, and I can deliver projects faster than ever.",
-        "image": {
-          "src": "/imgs/users/5.png"
-        }
-      },
-      {
-        "title": "David Kim",
-        "label": "Social Media Manager",
-        "description": "This free Qwen image generator revolutionized our social media strategy. We create engaging visuals in minutes instead of hours.",
-        "image": {
-          "src": "/imgs/users/6.png"
-        }
-      }
-    ]
+    "disabled": true
   },
   "faq": {
     "name": "faq",
@@ -370,11 +264,11 @@
       },
       {
         "title": "Can I use generated Qwen images for commercial purposes?",
-        "description": "Yes, you can use the Qwen images you generate for both personal and commercial projects. There are no usage restrictions on the images you create with our free Qwen image generator."
+        "description": "Absolutely! All Qwen images you generate are yours to use freely for personal projects, commercial work, or any purpose you need. There are no copyright restrictions or usage limitations."
       },
       {
-        "title": "What tips can help me create better Qwen images?",
-        "description": "For best Qwen image results, use detailed, descriptive prompts. Specify style, colors, composition, and mood. Use negative prompts to exclude unwanted elements, and experiment with different aspect ratios for your specific needs."
+        "title": "Are there any daily generation limits?",
+        "description": "No limits at all! Our free Qwen image generator truly offers unlimited usage. Generate as many images as you want with no daily quotas or hidden restrictions."
       }
     ]
   },
@@ -382,7 +276,7 @@
     "name": "footer",
     "brand": {
       "title": "Free Qwen Image",
-      "description": "Free Qwen Image Generator - Create unlimited AI-generated Qwen images with advanced technology. Professional quality, completely free.",
+      "description": "Free Qwen Image Generator - Create unlimited high-quality images using advanced Qwen AI technology. Professional quality, completely free.",
       "logo": {
         "src": "/logo.png",
         "alt": "Free Qwen Image Generator"
@@ -393,10 +287,10 @@
     "nav": {
       "items": [
         {
-          "title": "Generator",
+          "title": "Qwen Images",
           "children": [
             {
-              "title": "Create Images",
+              "title": "Generate Images",
               "url": "/#ai_generator",
               "target": "_self"
             },
@@ -408,10 +302,10 @@
           ]
         },
         {
-          "title": "About",
+          "title": "Learn More",
           "children": [
             {
-              "title": "What is Free Qwen Image",
+              "title": "About Us",
               "url": "/#introduce",
               "target": "_self"
             },
@@ -423,26 +317,16 @@
           ]
         },
         {
-          "title": "Community",
-          "children": [
-            {
-              "title": "Gallery",
-              "url": "/#showcase",
-              "target": "_self"
-            },
-            {
-              "title": "User Statistics",
-              "url": "/#stats",
-              "target": "_self"
-            }
-          ]
-        },
-        {
           "title": "Support",
           "children": [
             {
               "title": "FAQ",
               "url": "/#faq",
+              "target": "_self"
+            },
+            {
+              "title": "Statistics",
+              "url": "/#stats",
               "target": "_self"
             }
           ]

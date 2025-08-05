@@ -18,18 +18,35 @@ export default async function RootLayout({
   return (
     <html lang={locale} suppressHydrationWarning>
       <head>
+        <meta charSet="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        {googleAdsenseCode && (
-          <meta name="google-adsense-account" content={googleAdsenseCode} />
-        )}
-
+        <meta httpEquiv="X-UA-Compatible" content="IE=edge" />
+        
+        {/* SEO Meta Tags */}
+        <meta name="robots" content="index, follow" />
+        <meta name="author" content="Free Qwen Image" />
+        <meta name="generator" content="Next.js" />
+        
         {/* Favicon 配置 - 支持多种格式和尺寸 */}
         <link rel="icon" href="/favicon.ico" sizes="any" />
         <link rel="icon" href="/favicon-32x32.png" type="image/png" sizes="32x32" />
         <link rel="icon" href="/favicon-16x16.png" type="image/png" sizes="16x16" />
         <link rel="apple-touch-icon" href="/apple-touch-icon.png" sizes="180x180" />
-        <meta name="theme-color" content="#FF6B6B" /> {/* 调整为您 logo 的主色调 */}
+        <meta name="theme-color" content="#FF6B6B" />
+        
+        {/* Security Headers */}
+        <meta name="referrer" content="origin-when-cross-origin" />
+        
+        {/* Performance Hints */}
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
+        
+        {/* Google AdSense */}
+        {googleAdsenseCode && (
+          <meta name="google-adsense-account" content={googleAdsenseCode} />
+        )}
 
+        {/* 国际化和规范化URL */}
         {locales &&
           locales.map((loc) => (
             <link
@@ -41,7 +58,7 @@ export default async function RootLayout({
           ))}
         <link rel="alternate" hrefLang="x-default" href={webUrl} />
       </head>
-      <body>{children}</body>
+      <body className="antialiased">{children}</body>
     </html>
   );
 }
