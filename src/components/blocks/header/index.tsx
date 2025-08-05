@@ -129,7 +129,7 @@ export default function Header({ header }: { header: HeaderType }) {
                               handleDropdownItemClick(i);
                               
                               // 处理锚点链接
-                              if (iitem.url.startsWith('/#')) {
+                              if (iitem.url && iitem.url.startsWith('/#')) {
                                 const targetId = iitem.url.substring(2);
                                 
                                 // 添加延迟以确保元素已渲染
@@ -191,9 +191,9 @@ export default function Header({ header }: { header: HeaderType }) {
                                 // 立即尝试滚动
                                 scrollToElement();
                                 
-                              } else if (iitem.url.startsWith('/')) {
+                              } else if (iitem.url && iitem.url.startsWith('/')) {
                                 window.location.href = iitem.url;
-                              } else {
+                              } else if (iitem.url) {
                                 window.open(iitem.url, iitem.target || '_blank');
                               }
                             }}
