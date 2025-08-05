@@ -1,5 +1,5 @@
 {
-  "name": "shipany-template-one",
+  "name": "freeqwenimage",
   "version": "2.6.0",
   "private": true,
   "author": "idoubi",
@@ -10,7 +10,7 @@
     "start": "NODE_NO_WARNINGS=1 next start",
     "lint": "next lint",
     "analyze": "ANALYZE=true pnpm build",
-    "docker:build": "docker build -f Dockerfile -t shipany-template-one:latest .",
+    "docker:build": "docker build -f Dockerfile -t freeqwenimage:latest .",
     "db:generate": "npx drizzle-kit generate --config=src/db/config.ts",
     "db:migrate": "npx drizzle-kit migrate --config=src/db/config.ts",
     "db:studio": "npx drizzle-kit studio --config=src/db/config.ts",

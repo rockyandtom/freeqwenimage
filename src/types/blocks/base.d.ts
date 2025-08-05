@@ -52,6 +52,10 @@ export interface NavItem {
   className?: string;
   children?: NavItem[];
   onClick?: () => void;
+  align?: "start" | "center" | "end";
+  sideOffset?: number;
+  trigger?: string;
+  highlightOnHover?: boolean;
 }
 
 export interface Nav {

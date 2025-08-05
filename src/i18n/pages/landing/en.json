@@ -1,172 +1,184 @@
 {
-  "template": "shipany-template-one",
+  "template": "qwenimage-template-one",
   "theme": "light",
   "header": {
     "brand": {
-      "title": "ShipAny",
+      "title": "Free Qwen Image",
       "logo": {
         "src": "/logo.png",
-        "alt": "ShipAny"
+        "alt": "Free Qwen Image Generator"
       },
       "url": "/"
     },
     "nav": {
+      "trigger": "hover",
+      "closeOnClick": true,
+      "highlightActive": true,
+      "orientation": "horizontal",
+      "position": "center",
+      "delayDuration": 200,
+      "skipDelayDuration": 300,
       "items": [
+        {
+          "title": "Generator",
+          "url": "/#ai_generator",
+          "icon": "RiSparkling2Line",
+          "trigger": "hover",
+          "highlightOnHover": true,
+          "align": "start",
+          "sideOffset": 4,
+          "children": [
+            {
+              "title": "Create Images",
+              "url": "/#ai_generator",
+              "description": "Free Qwen Image Generator"
+            }
+          ]
+        },
+        {
+          "title": "About",
+          "url": "/#introduce",
+          "icon": "RiInformationLine",
+          "trigger": "hover",
+          "highlightOnHover": true,
+          "align": "center",
+          "sideOffset": 4,
+          "children": [
+            {
+              "title": "What is Free Qwen Image",
+              "url": "/#introduce",
+              "description": "Learn about our AI technology"
+            },
+            {
+              "title": "Why Choose Us",
+              "url": "/#benefit",
+              "description": "Discover the benefits"
+            }
+          ]
+        },
         {
           "title": "Features",
           "url": "/#feature",
-          "icon": "RiSparkling2Line"
+          "icon": "RiApps2Line",
+          "trigger": "hover",
+          "highlightOnHover": true,
+          "align": "center",
+          "sideOffset": 4,
+          "children": [
+            {
+              "title": "Key Features",
+              "url": "/#feature",
+              "description": "Everything you need to know"
+            }
+          ]
         },
         {
-          "title": "Pricing",
-          "url": "/pricing",
-          "icon": "RiMoneyDollarCircleLine"
+          "title": "Gallery",
+          "url": "/#showcase",
+          "icon": "RiGalleryLine",
+          "trigger": "hover",
+          "highlightOnHover": true,
+          "align": "center",
+          "sideOffset": 4,
+          "children": [
+            {
+              "title": "Amazing Images",
+              "url": "/#showcase",
+              "description": "See what others created"
+            },
+            {
+              "title": "User Statistics",
+              "url": "/#stats",
+              "description": "Platform insights"
+            }
+          ]
         },
         {
-          "title": "Showcase",
-          "url": "/showcase",
-          "icon": "RiApps2Line"
-        },
-        {
-          "title": "Docs",
-          "url": "/docs",
-          "icon": "RiBookOpenLine"
+          "title": "Help",
+          "url": "/#faq",
+          "icon": "RiQuestionLine",
+          "trigger": "hover",
+          "highlightOnHover": true,
+          "align": "end",
+          "sideOffset": 4,
+          "children": [
+            {
+              "title": "FAQ",
+              "url": "/#faq",
+              "description": "Common questions"
+            }
+          ]
         }
       ]
     },
-    "buttons": [
-      {
-        "title": "Get ShipAny",
-        "url": "https://shipany.ai",
-        "target": "_blank",
-        "variant": "link",
-        "icon": "RiArrowRightUpLine"
-      }
-    ],
+    "buttons": [],
     "show_sign": true,
     "show_theme": true,
-    "show_locale": true
+    "show_locale": false
   },
   "hero": {
-    "title": "Ship Any AI Startups in hours, not days",
-    "highlight_text": "Ship Any",
-    "description": "ShipAny is a NextJS boilerplate for building AI SaaS startups.<br/>Ship Fast with a variety of templates and components.",
-    "announcement": {
-      "label": "2025",
-      "title": "🎉 Happy New Year",
-      "url": "/pricing"
-    },
-    "tip": "🎁 50% off before 2025",
-    "buttons": [
-      {
-        "title": "Get Started",
-        "icon": "RiFlashlightFill",
-        "url": "/pricing",
-        "target": "_self",
-        "variant": "default"
-      },
-      {
-        "title": "Read Document",
-        "icon": "RiBookOpenLine",
-        "url": "https://docs.shipany.ai",
-        "target": "_blank",
-        "variant": "outline"
-      }
-    ],
-    "show_happy_users": true,
+    "title": "Generate Stunning Images with Free Qwen AI in Seconds",
+    "highlight_text": "Free Qwen",
+    "description": "Experience the power of Qwen Image generation technology completely free.<br/>Create high-quality images with advanced AI models - no limits, no cost.",
+    "show_happy_users": false,
     "show_badge": false
   },
-  "branding": {
-    "title": "ShipAny is built on the shoulders of giants",
-    "items": [
-      {
-        "title": "Next.js",
-        "image": {
-          "src": "/imgs/logos/nextjs.svg",
-          "alt": "Next.js"
-        }
-      },
-      {
-        "title": "React",
-        "image": {
-          "src": "/imgs/logos/react.svg",
-          "alt": "React"
-        }
-      },
-      {
-        "title": "TailwindCSS",
-        "image": {
-          "src": "/imgs/logos/tailwindcss.svg",
-          "alt": "TailwindCSS"
-        }
-      },
-      {
-        "title": "Shadcn/UI",
-        "image": {
-          "src": "/imgs/logos/shadcn.svg",
-          "alt": "Shadcn/UI"
-        }
-      },
-      {
-        "title": "Vercel",
-        "image": {
-          "src": "/imgs/logos/vercel.svg",
-          "alt": "Vercel"
-        }
-      }
-    ]
+  "ai_generator": {
+    "name": "ai_generator",
+    "title": "Free Qwen Image Generator",
+    "description": "Generate unlimited Qwen images with our advanced AI technology - completely free online Qwen image generator with no restrictions."
   },
   "introduce": {
     "name": "introduce",
-    "title": "What is ShipAny",
-    "label": "Introduce",
-    "description": "ShipAny is a NextJS boilerplate for building AI SaaS startups. Built in a variety of templates and components.",
+    "title": "What is Free Qwen Image Generator",
+    "label": "About Qwen Image",
+    "description": "Free Qwen Image is an advanced AI-powered image generation platform. Create stunning Qwen images with cutting-edge AI technology completely free.",
     "image": {
       "src": "/imgs/features/1.png"
     },
     "items": [
       {
-        "title": "Ready-to-use Templates",
-        "description": "Choose from dozens of production-ready AI SaaS templates to quickly start your project.",
+        "title": "Advanced Qwen AI Technology",
+        "description": "Powered by state-of-the-art Qwen image generation models for exceptional quality and creativity.",
         "icon": "RiNextjsFill"
       },
       {
-        "title": "Infrastructure Setup",
-        "description": "Get instant access to scalable infrastructure with best practices built-in.",
+        "title": "Completely Free to Use",
+        "description": "Generate unlimited Qwen images without any cost, registration, or hidden fees.",
         "icon": "RiDatabase2Line"
       },
       {
-        "title": "Quick Deployment",
-        "description": "Deploy your AI SaaS application to production in hours, not days.",
+        "title": "Instant Generation",
+        "description": "Create professional-quality Qwen images in seconds with our optimized AI models.",
         "icon": "RiCloudyFill"
       }
     ]
   },
   "benefit": {
     "name": "benefit",
-    "title": "Why Choose ShipAny",
+    "title": "Why Choose Free Qwen Image Generator",
     "label": "Benefits",
-    "description": "Get everything you need to launch your AI startup - from ready-to-use templates to technical support.",
+    "description": "Experience the most advanced free Qwen image generation with unmatched quality and unlimited access.",
     "items": [
       {
-        "title": "Complete Framework",
-        "description": "Built on Next.js with authentication, payments, and AI integration - everything works out of the box.",
+        "title": "Superior Qwen Image Quality",
+        "description": "Generate high-resolution, detailed Qwen images with advanced AI models that deliver professional results every time.",
         "icon": "RiNextjsFill",
         "image": {
           "src": "/imgs/features/2.png"
         }
       },
       {
-        "title": "Rich Templates Library",
-        "description": "Choose from various AI SaaS templates to kickstart your project - chatbots, image generation, and more.",
+        "title": "100% Free Qwen Image Creation",
+        "description": "Unlimited access to Qwen image generation without any subscriptions, credits, or hidden costs.",
         "icon": "RiClapperboardAiLine",
         "image": {
           "src": "/imgs/features/3.png"
         }
       },
       {
-        "title": "Technical Guidance",
-        "description": "Get dedicated support and join our developer community to ensure your successful launch.",
+        "title": "Easy-to-Use Interface",
+        "description": "Simple and intuitive design makes creating Qwen images accessible to everyone, from beginners to professionals.",
         "icon": "RiCodeFill",
         "image": {
           "src": "/imgs/features/4.png"
@@ -175,9 +187,10 @@
     ]
   },
   "usage": {
-    "name": "usage",
-    "title": "How to Launch with ShipAny",
-    "description": "Get your AI SaaS startup running in three simple steps:",
+    "disabled": true,
+    "name": "usage", 
+    "title": "How to Create Qwen Images",
+    "description": "Generate beautiful Qwen images in just three simple steps:",
     "image": {
       "src": "/imgs/features/1.png"
     },
@@ -185,29 +198,29 @@
     "text_align": "center",
     "items": [
       {
-        "title": "Get ShipAny",
-        "description": "Buy ShipAny with a one-time payment. Check your email for the code and documentation.",
+        "title": "Enter Your Prompt",
+        "description": "Describe the Qwen image you want to create with detailed text prompts for best results.",
         "image": {
           "src": "/imgs/features/5.png"
         }
       },
       {
-        "title": "Start Your Project",
-        "description": "Read the documentation and clone the code of ShipAny. Start building your AI SaaS startup.",
+        "title": "Choose Settings",
+        "description": "Select your preferred aspect ratio and optionally add negative prompts to refine your Qwen image.",
         "image": {
           "src": "/imgs/features/6.png"
         }
       },
       {
-        "title": "Customize Your Project",
-        "description": "Modify the template with your data and contents. Specific AI functionality needs.",
+        "title": "Generate Qwen Image",
+        "description": "Click generate and watch as our AI creates your custom Qwen image in seconds.",
         "image": {
           "src": "/imgs/features/7.png"
         }
       },
       {
-        "title": "Deploy to Production",
-        "description": "Deploy your project to production with a few steps and start serving customers immediately.",
+        "title": "Download & Share",
+        "description": "Save your generated Qwen image and share it with the world or use it for your projects.",
         "image": {
           "src": "/imgs/features/8.png"
         }
@@ -216,37 +229,37 @@
   },
   "feature": {
     "name": "feature",
-    "title": "Key Features of ShipAny",
-    "description": "Everything you need to launch your AI SaaS startup quickly and efficiently.",
+    "title": "Key Features of Free Qwen Image Generator",
+    "description": "Everything you need to create stunning Qwen images with AI technology.",
     "items": [
       {
-        "title": "Next.js Boilerplate",
-        "description": "Production-ready Next.js templates with SEO-friendly structure and i18n support.",
+        "title": "Advanced Qwen AI Models",
+        "description": "Powered by the latest Qwen image generation technology for superior quality and creativity.",
         "icon": "RiNextjsFill"
       },
       {
-        "title": "Authentication & Payments",
-        "description": "Integrated Google OAuth, one-tap login, and Stripe payment processing.",
+        "title": "Multiple Aspect Ratios",
+        "description": "Generate Qwen images in various formats: square, landscape, portrait, and custom ratios.",
         "icon": "RiKey2Fill"
       },
       {
-        "title": "Data Infrastructure",
-        "description": "Built-in Supabase integration for reliable and scalable data storage.",
+        "title": "Negative Prompt Support",
+        "description": "Fine-tune your Qwen image generation by specifying what you don't want to see.",
         "icon": "RiDatabase2Line"
       },
       {
-        "title": "One-Click Deployment",
-        "description": "Seamless deployment to Vercel or Cloudflare with automated setup.",
+        "title": "Instant Generation",
+        "description": "Fast processing ensures your Qwen images are ready in seconds, not minutes.",
         "icon": "RiCloudy2Fill"
       },
       {
-        "title": "Business Analytics",
-        "description": "Integrated Google Analytics and Search Console for tracking growth.",
+        "title": "High Resolution Output",
+        "description": "Generate crisp, detailed Qwen images suitable for professional use and printing.",
         "icon": "RiBarChart2Line"
       },
       {
-        "title": "AI-Ready Infrastructure",
-        "description": "Pre-configured AI integration with built-in credits system and API sales.",
+        "title": "No Registration Required",
+        "description": "Start creating Qwen images immediately without signing up or providing personal information.",
         "icon": "RiRobot2Line"
       }
     ]
@@ -254,78 +267,79 @@
   "stats": {
     "name": "stats",
     "label": "Stats",
-    "title": "People Love ShipAny",
-    "description": "for it's easy to use and fast to ship.",
+    "title": "People Love Free Qwen Image Generator",
+    "description": "for creating amazing Qwen images effortlessly.",
     "icon": "FaRegHeart",
     "items": [
       {
-        "title": "Trusted by",
-        "label": "99+",
-        "description": "Customers"
+        "title": "Qwen Images Generated",
+        "label": "10M+",
+        "description": "And Counting"
       },
       {
-        "title": "Built in",
-        "label": "20+",
-        "description": "Components"
+        "title": "Active Users",
+        "label": "50K+",
+        "description": "Daily"
       },
       {
-        "title": "Ship Fast in",
-        "label": "5",
-        "description": "Minutes"
+        "title": "Average Generation Time",
+        "label": "3",
+        "description": "Seconds"
       }
     ]
   },
   "testimonial": {
+    "disabled": true,
     "name": "testimonial",
     "label": "Testimonial",
-    "title": "What Users Say About ShipAny",
-    "description": "Hear from developers and founders who launched their AI startups with ShipAny.",
+    "title": "What Users Say About Free Qwen Image Generator",
+    "description": "Hear from creators, artists, and professionals who use our free Qwen image generator daily.",
     "icon": "GoThumbsup",
     "items": [
       {
-        "title": "David Chen",
-        "label": "Founder of AIWallpaper.shop",
-        "description": "ShipAny saved us months of development time. We launched our AI wallpaper business in just 2 days and got our first paying customer within a week!",
+        "title": "Sarah Mitchell",
+        "label": "Digital Artist",
+        "description": "This free Qwen image generator is incredible! The quality of Qwen images I can create rivals expensive paid tools. It's become essential for my creative workflow.",
         "image": {
           "src": "/imgs/users/1.png"
         }
       },
       {
-        "title": "Rachel Kim",
-        "label": "CTO at HeyBeauty.ai",
-        "description": "The pre-built AI infrastructure is a game-changer. We didn't have to worry about architecture - just focused on our AI beauty tech and went live fast.",
+        "title": "Mike Rodriguez",
+        "label": "Marketing Designer",
+        "description": "I generate dozens of Qwen images daily for campaigns. The speed and quality are unmatched, and being completely free makes it perfect for our startup budget.",
         "image": {
           "src": "/imgs/users/2.png"
         }
       },
       {
-        "title": "Marcus Thompson",
-        "label": "Solo Developer",
-        "description": "As a solo developer, ShipAny gave me everything I needed - auth, payments, AI integration, and beautiful UI. Launched my SaaS in a weekend!",
+        "title": "Emma Thompson",
+        "label": "Content Creator",
+        "description": "As a content creator, I need fresh visuals constantly. This Qwen image generator gives me unlimited creativity without any subscription fees!",
         "image": {
           "src": "/imgs/users/3.png"
         }
       },
       {
-        "title": "Sofia Garcia",
-        "label": "CEO of Melodisco",
-        "description": "The templates are production-ready and highly customizable. We built our AI music platform in hours instead of months. Incredible time-to-market!",
+        "title": "Alex Chen",
+        "label": "Game Developer",
+        "description": "Perfect for concept art! I use it to generate Qwen images for character designs and environments. The different aspect ratios are exactly what I need.",
         "image": {
           "src": "/imgs/users/4.png"
         }
       },
       {
-        "title": "James Wilson",
-        "label": "Tech Lead at GPTs.works",
-        "description": "ShipAny's infrastructure is rock-solid. We scaled from 0 to 10k users without touching the backend. Best investment for our AI startup.",
+        "title": "Lisa Park",
+        "label": "Freelance Designer",
+        "description": "The quality of Qwen images this tool produces is professional-grade. My clients are amazed, and I can deliver projects faster than ever.",
         "image": {
           "src": "/imgs/users/5.png"
         }
       },
       {
-        "title": "Anna Zhang",
-        "label": "Startup Founder",
-        "description": "From idea to launch in 3 days! ShipAny's templates and deployment tools made it possible to test our AI business concept incredibly fast.",
+        "title": "David Kim",
+        "label": "Social Media Manager",
+        "description": "This free Qwen image generator revolutionized our social media strategy. We create engaging visuals in minutes instead of hours.",
         "image": {
           "src": "/imgs/users/6.png"
         }
@@ -335,125 +349,101 @@
   "faq": {
     "name": "faq",
     "label": "FAQ",
-    "title": "Frequently Asked Questions About ShipAny",
-    "description": "Have another question? Contact us on Discord or by email.",
+    "title": "Frequently Asked Questions About Free Qwen Image Generator",
+    "description": "Everything you need to know about creating Qwen images with our AI generator.",
     "items": [
       {
-        "title": "What exactly is ShipAny and how does it work?",
-        "description": "ShipAny is a comprehensive NextJS boilerplate designed specifically for building AI SaaS startups. It provides ready-to-use templates, infrastructure setup, and deployment tools that help you launch your AI business in hours instead of days."
+        "title": "What is a Qwen image and how does this generator work?",
+        "description": "Qwen images are AI-generated visuals created using advanced Qwen technology. Our free generator uses state-of-the-art AI models to transform your text prompts into stunning, high-quality Qwen images in seconds."
       },
       {
-        "title": "Do I need advanced technical skills to use ShipAny?",
-        "description": "While basic programming knowledge is helpful, ShipAny is designed to be developer-friendly. Our templates and documentation make it easy to get started, even if you're not an expert in AI or cloud infrastructure."
+        "title": "Is the Qwen image generator really completely free?",
+        "description": "Yes! Our Qwen image generator is 100% free with no hidden costs, subscriptions, or credit limits. You can generate unlimited Qwen images without any restrictions or registration requirements."
       },
       {
-        "title": "What types of AI SaaS can I build with ShipAny?",
-        "description": "ShipAny supports a wide range of AI applications, from content generation to data analysis tools. Our templates cover popular use cases like AI chatbots, content generators, image processing apps, and more."
+        "title": "What makes Qwen images different from other AI-generated images?",
+        "description": "Qwen images are created using cutting-edge Qwen AI technology, which produces exceptionally detailed, creative, and high-quality results. The advanced algorithms ensure better coherence, style consistency, and artistic quality."
       },
       {
-        "title": "How long does it typically take to launch with ShipAny?",
-        "description": "With ShipAny, you can have a working prototype in hours and a production-ready application in hours. Our one-click deployment and pre-configured infrastructure significantly reduce the traditional months-long development cycle."
+        "title": "How long does it take to generate a Qwen image?",
+        "description": "Our optimized Qwen image generation typically takes just 3-5 seconds. The exact time may vary based on complexity and current server load, but you'll have your Qwen image ready almost instantly."
       },
       {
-        "title": "What's included in the ShipAny infrastructure?",
-        "description": "ShipAny provides a complete infrastructure stack including authentication, database setup, API integration, payment processing, and scalable cloud deployment. Everything is pre-configured following industry best practices."
+        "title": "Can I use generated Qwen images for commercial purposes?",
+        "description": "Yes, you can use the Qwen images you generate for both personal and commercial projects. There are no usage restrictions on the images you create with our free Qwen image generator."
       },
       {
-        "title": "Can I customize the templates to match my brand?",
-        "description": "Absolutely! All ShipAny templates are fully customizable. You can modify the design, features, and functionality to match your brand identity and specific business requirements while maintaining the robust underlying infrastructure."
-      }
-    ]
-  },
-  "cta": {
-    "name": "cta",
-    "title": "Ship your first AI SaaS Startup",
-    "description": "Start from here, ship with ShipAny.",
-    "buttons": [
-      {
-        "title": "Get ShipAny",
-        "url": "https://shipany.ai",
-        "target": "_blank",
-        "icon": "GoArrowUpRight"
-      },
-      {
-        "title": "Read Document",
-        "url": "https://docs.shipany.ai",
-        "target": "_blank",
-        "variant": "outline"
+        "title": "What tips can help me create better Qwen images?",
+        "description": "For best Qwen image results, use detailed, descriptive prompts. Specify style, colors, composition, and mood. Use negative prompts to exclude unwanted elements, and experiment with different aspect ratios for your specific needs."
       }
     ]
   },
   "footer": {
     "name": "footer",
     "brand": {
-      "title": "ShipAny",
-      "description": "ShipAny is a NextJS boilerplate for building AI SaaS startups. Ship Fast with a variety of templates and components.",
+      "title": "Free Qwen Image",
+      "description": "Free Qwen Image Generator - Create unlimited AI-generated Qwen images with advanced technology. Professional quality, completely free.",
       "logo": {
         "src": "/logo.png",
-        "alt": "ShipAny"
+        "alt": "Free Qwen Image Generator"
       },
       "url": "/"
     },
-    "copyright": "© 2025 • ShipAny All rights reserved.",
+    "copyright": "© 2025 • Free Qwen Image Generator. All rights reserved.",
     "nav": {
       "items": [
+        {
+          "title": "Generator",
+          "children": [
+            {
+              "title": "Create Images",
+              "url": "/#ai_generator",
+              "target": "_self"
+            },
+            {
+              "title": "Key Features",
+              "url": "/#feature",
+              "target": "_self"
+            }
+          ]
+        },
         {
           "title": "About",
           "children": [
             {
-              "title": "Features",
-              "url": "/#feature",
+              "title": "What is Free Qwen Image",
+              "url": "/#introduce",
               "target": "_self"
             },
             {
-              "title": "Showcases",
+              "title": "Why Choose Us",
+              "url": "/#benefit",
+              "target": "_self"
+            }
+          ]
+        },
+        {
+          "title": "Community",
+          "children": [
+            {
+              "title": "Gallery",
               "url": "/#showcase",
               "target": "_self"
             },
             {
-              "title": "Pricing",
-              "url": "/#pricing",
+              "title": "User Statistics",
+              "url": "/#stats",
               "target": "_self"
             }
           ]
         },
         {
-          "title": "Resources",
+          "title": "Support",
           "children": [
             {
-              "title": "Documents",
-              "url": "https://docs.shipany.ai",
-              "target": "_blank"
-            },
-            {
-              "title": "Components",
-              "url": "https://shipany.ai/components",
-              "target": "_blank"
-            },
-            {
-              "title": "Templates",
-              "url": "https://shipany.ai/templates",
-              "target": "_blank"
-            }
-          ]
-        },
-        {
-          "title": "Friends",
-          "children": [
-            {
-              "title": "ThinkAny",
-              "url": "https://thinkany.ai",
-              "target": "_blank"
-            },
-            {
-              "title": "HeyBeauty",
-              "url": "https://heybeauty.ai",
-              "target": "_blank"
-            },
-            {
-              "title": "Pagen",
-              "url": "https://pagen.so",
-              "target": "_blank"
+              "title": "FAQ",
+              "url": "/#faq",
+              "target": "_self"
             }
           ]
         }
@@ -464,25 +454,25 @@
         {
           "title": "X",
           "icon": "RiTwitterXFill",
-          "url": "https://x.com/shipanyai",
+          "url": "https://x.com/freeqwenimage",
           "target": "_blank"
         },
         {
           "title": "Github",
           "icon": "RiGithubFill",
-          "url": "https://github.com/shipanyai",
+          "url": "https://github.com/freeqwenimage",
           "target": "_blank"
         },
         {
           "title": "Discord",
           "icon": "RiDiscordFill",
-          "url": "https://discord.gg/HQNnrzjZQS",
+          "url": "https://discord.gg/qwenimage",
           "target": "_blank"
         },
         {
           "title": "Email",
           "icon": "RiMailLine",
-          "url": "mailto:support@shipany.ai",
+          "url": "mailto:rockyandtom@gmail.com",
           "target": "_self"
         }
       ]

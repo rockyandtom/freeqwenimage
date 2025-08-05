@@ -1,83 +1,150 @@
 {
-  "template": "shipany-template-one",
+  "template": "qwenimage-template-one",
   "theme": "light",
   "header": {
     "brand": {
-      "title": "ShipAny",
+      "title": "Free Qwen Image",
       "logo": {
         "src": "/logo.png",
-        "alt": "ShipAny"
+        "alt": "Free Qwen Image 生成器"
       },
       "url": "/"
     },
     "nav": {
+      "trigger": "hover",
+      "closeOnClick": true,
+      "highlightActive": true,
+      "orientation": "horizontal",
+      "position": "center",
+      "delayDuration": 200,
+      "skipDelayDuration": 300,
       "items": [
         {
-          "title": "功能特点",
-          "url": "/#feature",
-          "icon": "RiSparkling2Line"
+          "title": "生成器",
+          "url": "/#ai_generator",
+          "icon": "RiSparkling2Line",
+          "trigger": "hover",
+          "highlightOnHover": true,
+          "align": "start",
+          "sideOffset": 4,
+          "children": [
+            {
+              "title": "创建图片",
+              "url": "/#ai_generator",
+              "description": "开始生成 Qwen 图片"
+            },
+            {
+              "title": "使用方法",
+              "url": "/#usage",
+              "description": "了解生成流程"
+            }
+          ]
         },
         {
-          "title": "定价",
-          "url": "/pricing",
-          "icon": "RiMoneyDollarCircleLine"
+          "title": "功能特色",
+          "url": "/#feature", 
+          "icon": "RiApps2Line",
+          "trigger": "hover",
+          "highlightOnHover": true,
+          "align": "center",
+          "sideOffset": 4,
+          "children": [
+            {
+              "title": "AI 技术",
+              "url": "/#introduce",
+              "description": "先进的 Qwen AI 模型"
+            },
+            {
+              "title": "免费工具",
+              "url": "/#feature",
+              "description": "包含所有功能"
+            },
+            {
+              "title": "产品优势",
+              "url": "/#benefit",
+              "description": "选择我们的理由"
+            }
+          ]
         },
         {
-          "title": "案例展示",
-          "url": "/showcase",
-          "icon": "RiApps2Line"
+          "title": "社区",
+          "url": "/#showcase",
+          "icon": "RiGroupLine",
+          "trigger": "hover",
+          "highlightOnHover": true,
+          "align": "center",
+          "sideOffset": 4,
+          "children": [
+            {
+              "title": "作品展示",
+              "url": "/#showcase",
+              "description": "精选 Qwen 图片"
+            },
+            {
+              "title": "用户评价",
+              "url": "/#testimonial",
+              "description": "创作者的心声"
+            },
+            {
+              "title": "平台数据",
+              "url": "/#stats",
+              "description": "使用统计"
+            }
+          ]
         },
         {
-          "title": "文档",
-          "url": "/docs",
-          "icon": "RiBookOpenLine"
+          "title": "帮助",
+          "url": "/#faq",
+          "icon": "RiQuestionLine",
+          "trigger": "hover",
+          "highlightOnHover": true,
+          "align": "end",
+          "sideOffset": 4,
+          "children": [
+            {
+              "title": "常见问题",
+              "url": "/#faq",
+              "description": "FAQ 解答"
+            },
+            {
+              "title": "使用技巧",
+              "url": "/#benefit",
+              "description": "创建更好的图片"
+            },
+            {
+              "title": "操作指南",
+              "url": "/#usage",
+              "description": "详细教程"
+            }
+          ]
         }
       ]
     },
-    "buttons": [
-      {
-        "title": "获取 ShipAny",
-        "url": "https://shipany.ai",
-        "target": "_blank",
-        "variant": "link",
-        "icon": "RiArrowRightUpLine"
-      }
-    ],
+    "buttons": [],
     "show_sign": true,
     "show_theme": true,
-    "show_locale": true
+    "show_locale": false
   },
   "hero": {
-    "title": "几小时内快速构建 AI 创业项目，而不是几天",
-    "highlight_text": "快速构建",
-    "description": "ShipAny 是一个用于构建 AI SaaS 创业项目的 NextJS 模板。<br/>通过丰富的模板和组件快速启动。",
+    "title": "秒速生成惊艳图片，使用免费Qwen AI",
+    "highlight_text": "免费Qwen",
+          "description": "体验免费的Qwen AI图片生成技术。<br/>创建高质量图片，先进的AI模型 - 无限制，无费用。",
     "announcement": {
       "label": "2025",
       "title": "🎉 新年快乐",
       "url": "/pricing"
     },
     "tip": "🎁 2025年前五折优惠",
-    "buttons": [
-      {
-        "title": "立即开始",
-        "icon": "RiFlashlightFill",
-        "url": "/pricing",
-        "target": "_self",
-        "variant": "default"
-      },
-      {
-        "title": "阅读文档",
-        "icon": "RiBookOpenLine",
-        "url": "https://docs.shipany.ai",
-        "target": "_blank",
-        "variant": "outline"
-      }
-    ],
     "show_happy_users": true,
     "show_badge": false
   },
+  "ai_generator": {
+    "name": "ai_generator",
+    "title": "免费 Qwen 图片生成器",
+    "description": "使用先进的AI技术创建精美图片 - 完全免费，无限制使用。"
+  },
   "branding": {
-    "title": "ShipAny 建立在巨人的肩膀上",
+          "title": "Qwen AI 基于先进技术构建",
     "items": [
       {
         "title": "Next.js",
@@ -118,9 +185,9 @@
   },
   "introduce": {
     "name": "introduce",
-    "title": "什么是 ShipAny",
-    "label": "介绍",
-    "description": "ShipAny 是一个用于构建 AI SaaS 创业项目的 NextJS 模板，内置多种模板和组件。",
+    "title": "什么是免费Qwen图片生成器",
+    "label": "介绍", 
+    "description": "发现Qwen AI强大的图片生成能力。我们的平台提供完全免费且直观的方式，可以即时创建高质量的Qwen图片。",
     "image": {
       "src": "/imgs/features/1.png"
     },
@@ -144,7 +211,7 @@
   },
   "benefit": {
     "name": "benefit",
-    "title": "为什么选择 ShipAny",
+    "title": "为什么选择我们的免费Qwen图片生成器",
     "label": "优势",
     "description": "获取启动 AI 创业所需的一切 - 从即用型模板到技术支持。",
     "items": [
@@ -176,7 +243,7 @@
   },
   "usage": {
     "name": "usage",
-    "title": "如何使用 ShipAny 启动项目",
+    "title": "如何创建Qwen图片",
     "description": "通过三个简单步骤启动您的 AI SaaS 创业项目：",
     "image": {
       "src": "/imgs/features/1.png"
@@ -185,15 +252,15 @@
     "text_align": "center",
     "items": [
       {
-        "title": "获取 ShipAny",
-        "description": "一次性付款购买 ShipAny。查收邮件获取代码和文档。",
+              "title": "输入您的提示",
+      "description": "访问我们免费的Qwen图片生成器。无需注册即可开始创建。",
         "image": {
           "src": "/imgs/features/5.png"
         }
       },
       {
         "title": "开始您的项目",
-        "description": "阅读文档并克隆 ShipAny 代码。开始构建您的 AI SaaS 创业项目。",
+        "description": "选择您喜欢的宽高比，可选择添加负面提示来优化您的Qwen图片。",
         "image": {
           "src": "/imgs/features/6.png"
         }
@@ -216,7 +283,7 @@
   },
   "feature": {
     "name": "feature",
-    "title": "ShipAny 核心功能",
+    "title": "Qwen图片生成器核心功能",
     "description": "快速高效启动 AI SaaS 创业所需的一切。",
     "items": [
       {
@@ -254,7 +321,7 @@
   "stats": {
     "name": "stats",
     "label": "统计",
-    "title": "用户喜爱 ShipAny",
+    "title": "用户喜爱我们的免费Qwen图片生成器",
     "description": "因为它易于使用且快速发布。",
     "icon": "FaRegHeart",
     "items": [
@@ -278,14 +345,14 @@
   "testimonial": {
     "name": "testimonial",
     "label": "用户评价",
-    "title": "用户如何评价 ShipAny",
-    "description": "听听使用 ShipAny 启动 AI 创业项目的开发者和创始人怎么说。",
+    "title": "用户如何评价免费Qwen图片生成器",
+    "description": "听听创作者、艺术家和专业人士对我们免费Qwen图片生成器的评价。",
     "icon": "GoThumbsup",
     "items": [
       {
         "title": "陈大卫",
         "label": "AIWallpaper.shop 创始人",
-        "description": "ShipAny 为我们节省了数月的开发时间。我们仅用 2 天就启动了 AI 壁纸业务，一周内就获得了第一个付费客户！",
+        "description": "这个免费的Qwen图片生成器令人惊叹！我能创建的Qwen图片质量可以媲美昂贵的付费工具。它已成为我创作工作流程的重要组成部分。",
         "image": {
           "src": "/imgs/users/1.png"
         }
@@ -301,7 +368,7 @@
       {
         "title": "马库斯",
         "label": "独立开发者",
-        "description": "作为独立开发者，ShipAny 给了我所需的一切 - 身份验证、支付、AI 集成和漂亮的 UI。一个周末就启动了我的 SaaS！",
+        "description": "作为设计师，这个免费的Qwen图片生成器为我的项目节省了无数小时。图片质量始终如一，而且完全免费使用！",
         "image": {
           "src": "/imgs/users/3.png"
         }
@@ -317,7 +384,7 @@
       {
         "title": "詹姆斯",
         "label": "GPTs.works 技术主管",
-        "description": "ShipAny 的基础设施非常稳固。我们从 0 扩展到 1 万用户都没碰后端。这是我们 AI 创业最好的投资。",
+        "description": "免费Qwen图片生成器的性能非常稳定。我们已经生成了数千张高质量图片，每次都能得到满意的结果。这是我们团队最喜欢的AI工具。",
         "image": {
           "src": "/imgs/users/5.png"
         }
@@ -325,7 +392,7 @@
       {
         "title": "张安娜",
         "label": "创业者",
-        "description": "从想法到上线只用了 3 天！ShipAny 的模板和部署工具让我们能够以令人难以置信的速度测试 AI 业务概念。",
+        "description": "从概念到实现只用了几分钟！免费Qwen图片生成器让我们能够以令人难以置信的速度实现创意想法并制作出精美的视觉内容。",
         "image": {
           "src": "/imgs/users/6.png"
         }
@@ -335,49 +402,49 @@
   "faq": {
     "name": "faq",
     "label": "常见问题",
-    "title": "关于 ShipAny 的常见问题",
+    "title": "关于免费Qwen图片生成器的常见问题",
     "description": "还有其他问题？通过 Discord 或电子邮件联系我们。",
     "items": [
       {
-        "title": "ShipAny 究竟是什么，它是如何工作的？",
-        "description": "ShipAny 是一个专门为构建 AI SaaS 创业项目设计的综合性 NextJS 模板。它提供即用型模板、基础设施设置和部署工具，帮助您在几小时内而不是几天内启动 AI 业务。"
+              "title": "什么是免费Qwen图片生成器，它是如何工作的？",
+      "description": "免费Qwen图片生成器是一个基于先进Qwen AI技术的图片创作平台。用户只需输入文字描述，我们的AI就能生成高质量的图片，完全免费且无限制使用。"
       },
       {
-        "title": "使用 ShipAny 需要高级技术技能吗？",
-        "description": "虽然基本的编程知识会有帮助，但 ShipAny 设计得非常开发者友好。我们的模板和文档使您即使不是 AI 或云基础设施专家也能轻松入门。"
+        "title": "使用免费Qwen图片生成器需要技术技能吗？",
+        "description": "不需要！我们的界面设计简单直观，任何人都可以轻松使用。只需输入您想要的图片描述，选择尺寸，点击生成即可。"
       },
       {
-        "title": "我可以用 ShipAny 构建什么类型的 AI SaaS？",
-        "description": "ShipAny 支持广泛的 AI 应用，从内容生成到数据分析工具。我们的模板涵盖流行用例，如 AI 聊天机器人、内容生成器、图像处理应用等。"
+        "title": "我可以创建什么类型的Qwen图片？",
+        "description": "您可以创建各种类型的图片：艺术作品、插图、概念设计、产品图片、风景画等。我们的AI支持多种风格和主题，唯一的限制是您的想象力。"
       },
       {
-        "title": "使用 ShipAny 通常需要多长时间才能启动？",
-        "description": "使用 ShipAny，您可以在几小时内完成工作原型，并在几小时内完成生产就绪的应用。我们的一键部署和预配置基础设施显著缩短了传统的数月开发周期。"
+        "title": "生成一张Qwen图片需要多长时间？",
+        "description": "我们的Qwen AI通常在几秒钟内就能生成高质量图片。具体时间可能因图片复杂度和服务器负载而略有不同，但通常不超过10秒。"
       },
       {
-        "title": "ShipAny 的基础设施包括什么？",
-        "description": "ShipAny 提供完整的基础设施栈，包括身份验证、数据库设置、API 集成、支付处理和可扩展的云部署。一切都按照行业最佳实践预先配置。"
+        "title": "免费Qwen图片生成器有什么限制吗？",
+        "description": "我们的基础服务完全免费，没有每日生成限制。我们致力于为所有用户提供优质的Qwen图片生成体验，让创意无界限。"
       },
       {
-        "title": "我可以自定义模板以匹配我的品牌吗？",
-        "description": "当然可以！所有 ShipAny 模板都完全可定制。您可以修改设计、功能和功能性以匹配您的品牌标识和特定业务需求，同时保持强大的底层基础设施。"
+        "title": "我可以商用生成的Qwen图片吗？",
+        "description": "当然可以！您通过我们平台生成的Qwen图片，您拥有完整的使用权，可以用于个人项目、商业用途或任何您需要的场景。"
       }
     ]
   },
   "cta": {
     "name": "cta",
-    "title": "启动您的第一个 AI SaaS 创业项目",
-    "description": "从这里开始，使用 ShipAny 启动。",
+    "title": "立即开始免费创建Qwen图片",
+    "description": "从这里开始，免费创建您的Qwen图片。",
     "buttons": [
       {
-        "title": "获取 ShipAny",
-        "url": "https://shipany.ai",
+        "title": "开始创建",
+        "url": "/#ai_generator",
         "target": "_blank",
         "icon": "GoArrowUpRight"
       },
       {
-        "title": "阅读文档",
-        "url": "https://docs.shipany.ai",
+        "title": "查看帮助",
+        "url": "/#faq",
         "target": "_blank",
         "variant": "outline"
       }
@@ -386,20 +453,25 @@
   "footer": {
     "name": "footer",
     "brand": {
-      "title": "ShipAny",
-      "description": "ShipAny 是一个用于构建 AI SaaS 创业项目的 NextJS 模板。通过丰富的模板和组件快速启动。",
+      "title": "Free Qwen Image",
+      "description": "Free Qwen Image 生成器 - 使用先进的Qwen AI技术创建无限制的高质量图片。专业品质，完全免费。",
       "logo": {
         "src": "/logo.png",
-        "alt": "ShipAny"
+        "alt": "Free Qwen Image 生成器"
       },
       "url": "/"
     },
-    "copyright": "© 2025 • ShipAny 保留所有权利。",
+    "copyright": "© 2025 • Free Qwen Image 生成器。保留所有权利。",
     "nav": {
       "items": [
         {
-          "title": "关于",
+          "title": "Qwen 图片",
           "children": [
+            {
+              "title": "生成图片",
+              "url": "/#ai_generator",
+              "target": "_self"
+            },
             {
               "title": "功能特点",
               "url": "/#feature",
@@ -409,51 +481,46 @@
               "title": "案例展示",
               "url": "/#showcase",
               "target": "_self"
+            }
+          ]
+        },
+        {
+          "title": "帮助",
+          "children": [
+            {
+              "title": "常见问题",
+              "url": "/#faq",
+              "target": "_self"
             },
             {
-              "title": "定价",
-              "url": "/#pricing",
+              "title": "使用指南",
+              "url": "/#usage",
+              "target": "_self"
+            },
+            {
+              "title": "优势介绍",
+              "url": "/#benefit",
               "target": "_self"
             }
           ]
         },
         {
-          "title": "资源",
+          "title": "社区",
           "children": [
             {
-              "title": "文档",
-              "url": "https://docs.shipany.ai",
-              "target": "_blank"
+              "title": "用户画廊",
+              "url": "/#showcase",
+              "target": "_self"
             },
             {
-              "title": "组件",
-              "url": "https://shipany.ai/components",
-              "target": "_blank"
+              "title": "用户评价",
+              "url": "/#testimonial",
+              "target": "_self"
             },
             {
-              "title": "模板",
-              "url": "https://shipany.ai/templates",
-              "target": "_blank"
-            }
-          ]
-        },
-        {
-          "title": "友情链接",
-          "children": [
-            {
-              "title": "ThinkAny",
-              "url": "https://thinkany.ai",
-              "target": "_blank"
-            },
-            {
-              "title": "HeyBeauty",
-              "url": "https://heybeauty.ai",
-              "target": "_blank"
-            },
-            {
-              "title": "Pagen",
-              "url": "https://pagen.so",
-              "target": "_blank"
+              "title": "统计数据",
+              "url": "/#stats",
+              "target": "_self"
             }
           ]
         }
@@ -462,27 +529,9 @@
     "social": {
       "items": [
         {
-          "title": "X",
-          "icon": "RiTwitterXFill",
-          "url": "https://x.com/shipanyai",
-          "target": "_blank"
-        },
-        {
-          "title": "Github",
-          "icon": "RiGithubFill",
-          "url": "https://github.com/shipanyai",
-          "target": "_blank"
-        },
-        {
-          "title": "Discord",
-          "icon": "RiDiscordFill",
-          "url": "https://discord.gg/HQNnrzjZQS",
-          "target": "_blank"
-        },
-        {
           "title": "邮箱",
           "icon": "RiMailLine",
-          "url": "mailto:support@shipany.ai",
+          "url": "mailto:rockyandtom@gmail.com",
           "target": "_self"
         }
       ]

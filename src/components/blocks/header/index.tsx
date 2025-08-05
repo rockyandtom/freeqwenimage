@@ -17,6 +17,12 @@ import {
   navigationMenuTriggerStyle,
 } from "@/components/ui/navigation-menu";
 import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu";
+import {
   Sheet,
   SheetContent,
   SheetHeader,
@@ -60,87 +66,94 @@ export default function Header({ header }: { header: HeaderType }) {
                 </span>
               )}
             </Link>
-            <div className="flex items-center">
-              <NavigationMenu>
-                <NavigationMenuList>
-                  {header.nav?.items?.map((item, i) => {
-                    if (item.children && item.children.length > 0) {
-                      return (
-                        <NavigationMenuItem
-                          key={i}
-                          className="text-muted-foreground"
-                        >
-                          <NavigationMenuTrigger>
-                            {item.icon && (
-                              <Icon
-                                name={item.icon}
-                                className="size-4 shrink-0 mr-2"
-                              />
-                            )}
-                            <span>{item.title}</span>
-                          </NavigationMenuTrigger>
-                          <NavigationMenuContent>
-                            <ul className="w-80 p-3">
-                              <NavigationMenuLink>
-                                {item.children.map((iitem, ii) => (
-                                  <li key={ii}>
-                                    <Link
-                                      className={cn(
-                                        "flex select-none gap-4 rounded-md p-3 leading-none no-underline outline-hidden transition-colors hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground"
-                                      )}
-                                      href={iitem.url as any}
-                                      target={iitem.target}
-                                    >
-                                      {iitem.icon && (
-                                        <Icon
-                                          name={iitem.icon}
-                                          className="size-5 shrink-0"
-                                        />
-                                      )}
-                                      <div>
-                                        <div className="text-sm font-semibold">
-                                          {iitem.title}
-                                        </div>
-                                        <p className="text-sm leading-snug text-muted-foreground">
-                                          {iitem.description}
-                                        </p>
-                                      </div>
-                                    </Link>
-                                  </li>
-                                ))}
-                              </NavigationMenuLink>
-                            </ul>
-                          </NavigationMenuContent>
-                        </NavigationMenuItem>
-                      );
-                    }
-
-                    return (
-                      <NavigationMenuItem key={i}>
-                        <Link
-                          className={cn(
-                            "text-muted-foreground",
-                            navigationMenuTriggerStyle,
-                            buttonVariants({
-                              variant: "ghost",
-                            })
-                          )}
-                          href={item.url as any}
-                          target={item.target}
+            <div className="flex items-center gap-1">
+              {header.nav?.items?.map((item, i) => {
+                if (item.children && item.children.length > 0) {
+                  return (
+                    <DropdownMenu key={i}>
+                      <DropdownMenuTrigger asChild>
+                        <Button
+                          variant="ghost"
+                          className="text-muted-foreground hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground h-10 px-4 py-2"
                         >
                           {item.icon && (
                             <Icon
                               name={item.icon}
-                              className="size-4 shrink-0 mr-0"
+                              className="size-4 shrink-0 mr-2"
                             />
                           )}
-                          {item.title}
-                        </Link>
-                      </NavigationMenuItem>
-                    );
-                  })}
-                </NavigationMenuList>
-              </NavigationMenu>
+                          <span>{item.title}</span>
+                          <svg
+                            className="ml-1 h-3 w-3"
+                            fill="none"
+                            stroke="currentColor"
+                            viewBox="0 0 24 24"
+                          >
+                            <path
+                              strokeLinecap="round"
+                              strokeLinejoin="round"
+                              strokeWidth={2}
+                              d="M19 9l-7 7-7-7"
+                            />
+                          </svg>
+                        </Button>
+                      </DropdownMenuTrigger>
+                      <DropdownMenuContent 
+                        align={item.align || "start"} 
+                        className="w-80 p-3"
+                        sideOffset={item.sideOffset || 4}
+                      >
+                        {item.children.map((iitem, ii) => (
+                          <DropdownMenuItem key={ii} asChild>
+                            <Link
+                              className="flex select-none gap-4 rounded-md p-3 leading-none no-underline outline-hidden transition-colors cursor-pointer"
+                              href={iitem.url as any}
+                              target={iitem.target}
+                            >
+                              {iitem.icon && (
+                                <Icon
+                                  name={iitem.icon}
+                                  className="size-5 shrink-0"
+                                />
+                              )}
+                              <div>
+                                <div className="text-sm font-semibold">
+                                  {iitem.title}
+                                </div>
+                                <p className="text-sm leading-snug text-muted-foreground">
+                                  {iitem.description}
+                                </p>
+                              </div>
+                            </Link>
+                          </DropdownMenuItem>
+                        ))}
+                      </DropdownMenuContent>
+                    </DropdownMenu>
+                  );
+                }
+
+                return (
+                  <Link
+                    key={i}
+                    className={cn(
+                      "text-muted-foreground h-10 px-4 py-2 rounded-md transition-colors hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground inline-flex items-center justify-center",
+                      buttonVariants({
+                        variant: "ghost",
+                      })
+                    )}
+                    href={item.url as any}
+                    target={item.target}
+                  >
+                    {item.icon && (
+                      <Icon
+                        name={item.icon}
+                        className="size-4 shrink-0 mr-2"
+                      />
+                    )}
+                    {item.title}
+                  </Link>
+                );
+              })}
             </div>
           </div>
           <div className="shrink-0 flex gap-2 items-center">

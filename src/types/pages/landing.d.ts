@@ -7,6 +7,7 @@ import { Pricing } from "@/types/blocks/pricing";
 export interface LandingPage {
   header?: Header;
   hero?: Hero;
+  ai_generator?: Section;
   branding?: Section;
   introduce?: Section;
   benefit?: Section;
@@ -17,7 +18,6 @@ export interface LandingPage {
   pricing?: Pricing;
   testimonial?: Section;
   faq?: Section;
-  cta?: Section;
   footer?: Footer;
 }
 
