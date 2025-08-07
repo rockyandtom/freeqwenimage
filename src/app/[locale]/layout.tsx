@@ -9,6 +9,7 @@ import { NextAuthSessionProvider } from "@/auth/session";
 import { NextIntlClientProvider } from "next-intl";
 import { ThemeProvider } from "@/providers/theme";
 import StructuredData from "@/components/seo/structured-data";
+import { getCanonicalUrl } from "@/lib/canonical";
 
 export async function generateMetadata({
   params,
@@ -20,7 +21,10 @@ export async function generateMetadata({
 
   const t = await getTranslations();
 
-  const siteUrl = process.env.NEXT_PUBLIC_WEB_URL || "https://freeqwenimage.com";
+  // 使用规范域名
+  const canonicalDomain = "https://freeqwenimage.com";
+  const canonicalUrl = await getCanonicalUrl(locale === 'en' ? '' : `/${locale}`);
+  
   const title = t("metadata.title") || "Free Qwen Image - AI Image Generator";
   const description = t("metadata.description") || "Free Qwen Image is a powerful AI image generator based on Qwen model.";
 
@@ -34,20 +38,20 @@ export async function generateMetadata({
     authors: [{ name: "Free Qwen Image" }],
     creator: "Free Qwen Image",
     publisher: "Free Qwen Image",
-    metadataBase: new URL(siteUrl),
+    metadataBase: new URL(canonicalDomain),
     alternates: {
-      canonical: siteUrl,
+      canonical: canonicalUrl,
     },
     openGraph: {
       type: "website",
       locale: locale,
-      url: siteUrl,
+      url: canonicalUrl,
       title: title,
       description: description,
       siteName: "Free Qwen Image",
       images: [
         {
-          url: `${siteUrl}/og-image.jpg`,
+          url: `${canonicalDomain}/og-image.jpg`,
           width: 1200,
           height: 630,
           alt: "Free Qwen Image - AI Image Generator",
@@ -60,7 +64,7 @@ export async function generateMetadata({
       creator: "@freeqwenimage",
       title: title,
       description: description,
-      images: [`${siteUrl}/og-image.jpg`],
+      images: [`${canonicalDomain}/og-image.jpg`],
     },
     robots: {
       index: true,

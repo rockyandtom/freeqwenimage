@@ -46,6 +46,19 @@ export default async function RootLayout({
           <meta name="google-adsense-account" content={googleAdsenseCode} />
         )}
 
+        {/* Google Analytics */}
+        <script async src="https://www.googletagmanager.com/gtag/js?id=G-SJGJM25E5W"></script>
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `
+              window.dataLayer = window.dataLayer || [];
+              function gtag(){dataLayer.push(arguments);}
+              gtag('js', new Date());
+              gtag('config', 'G-SJGJM25E5W');
+            `,
+          }}
+        />
+
         {/* 国际化和规范化URL */}
         {locales &&
           locales.map((loc) => (
@@ -53,10 +66,10 @@ export default async function RootLayout({
               key={loc}
               rel="alternate"
               hrefLang={loc}
-              href={`${webUrl}${loc === "en" ? "" : `/${loc}`}/`}
+              href={`https://freeqwenimage.com${loc === "en" ? "" : `/${loc}`}/`}
             />
           ))}
-        <link rel="alternate" hrefLang="x-default" href={webUrl} />
+        <link rel="alternate" hrefLang="x-default" href="https://freeqwenimage.com" />
       </head>
       <body className="antialiased">{children}</body>
     </html>

@@ -160,9 +160,9 @@ export default function AIImageGenerator() {
     <div className="w-full max-w-4xl mx-auto p-6 space-y-6">
       {/* 标题 */}
       <div className="text-center">
-        <h1 className="text-3xl font-bold text-foreground mb-2">
+        <h2 className="text-3xl font-bold text-foreground mb-2">
           Free Qwen Image Generator
-        </h1>
+        </h2>
         <p className="text-muted-foreground">
           Transform your ideas into stunning images with advanced AI technology
         </p>

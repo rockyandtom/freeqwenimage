@@ -19,10 +19,12 @@ export async function generateMetadata({
   params: Promise<{ locale: string }>;
 }) {
   const { locale } = await params;
-  let canonicalUrl = `${process.env.NEXT_PUBLIC_WEB_URL}`;
+  
+  // 使用规范域名
+  let canonicalUrl = `https://freeqwenimage.com`;
 
   if (locale !== "en") {
-    canonicalUrl = `${process.env.NEXT_PUBLIC_WEB_URL}/${locale}`;
+    canonicalUrl = `https://freeqwenimage.com/${locale}`;
   }
 
   return {
