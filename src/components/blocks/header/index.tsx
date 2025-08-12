@@ -58,7 +58,7 @@ export default function Header({ header }: { header: HeaderType }) {
   };
 
   return (
-    <section className="py-3" data-header>
+    <section className="fixed top-0 left-0 right-0 z-50 py-3 bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60 border-b border-border/40" data-header>
       <div className="container">
         <nav className="hidden justify-between lg:flex">
           <div className="flex items-center gap-6">
@@ -137,11 +137,9 @@ export default function Header({ header }: { header: HeaderType }) {
                                   const targetElement = document.getElementById(targetId);
                                   
                                   if (targetElement) {
-                                    // 动态计算header高度
-                                    const headerElement = document.querySelector('header') || 
-                                                         document.querySelector('nav') ||
-                                                         document.querySelector('[data-header]');
-                                    const headerHeight = headerElement ? headerElement.offsetHeight + 20 : 100;
+                                    // 固定header高度计算
+                                    const headerElement = document.querySelector('[data-header]') as HTMLElement;
+                                    const headerHeight = headerElement ? headerElement.offsetHeight + 20 : 80;
                                     
                                     const elementPosition = targetElement.getBoundingClientRect().top;
                                     const offsetPosition = elementPosition + window.pageYOffset - headerHeight;
@@ -163,10 +161,8 @@ export default function Header({ header }: { header: HeaderType }) {
                                         setTimeout(() => {
                                           const retryElement = document.getElementById(targetId);
                                           if (retryElement) {
-                                            const headerElement = document.querySelector('header') || 
-                                                               document.querySelector('nav') ||
-                                                               document.querySelector('[data-header]');
-                                            const headerHeight = headerElement ? headerElement.offsetHeight + 20 : 100;
+                                            const headerElement = document.querySelector('[data-header]') as HTMLElement;
+                                            const headerHeight = headerElement ? headerElement.offsetHeight + 20 : 80;
                                             
                                             const elementPosition = retryElement.getBoundingClientRect().top;
                                             const offsetPosition = elementPosition + window.pageYOffset - headerHeight;

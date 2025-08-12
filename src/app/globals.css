@@ -29,3 +29,18 @@ button {
 pre {
   @apply px-4;
 }
+
+/* Fixed header styles */
+[data-header] {
+  transition: all 0.3s ease-in-out;
+}
+
+/* Smooth scrolling for anchor links */
+html {
+  scroll-behavior: smooth;
+}
+
+/* Ensure proper spacing for fixed header */
+body {
+  scroll-padding-top: 5rem;
+}

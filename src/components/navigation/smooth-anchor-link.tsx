@@ -38,11 +38,9 @@ export default function SmoothAnchorLink({
         const targetElement = document.getElementById(targetId);
         
         if (targetElement) {
-          // 动态计算header高度
-          const headerElement = document.querySelector('header') || 
-                               document.querySelector('nav') ||
-                               document.querySelector('[data-header]');
-          const headerHeight = headerElement ? headerElement.offsetHeight + 20 : 100;
+          // 固定header高度计算
+          const headerElement = document.querySelector('[data-header]') as HTMLElement;
+          const headerHeight = headerElement ? headerElement.offsetHeight + 20 : 80;
           
           const elementPosition = targetElement.getBoundingClientRect().top;
           const offsetPosition = elementPosition + window.pageYOffset - headerHeight;
@@ -66,10 +64,8 @@ export default function SmoothAnchorLink({
               setTimeout(() => {
                 const retryElement = document.getElementById(targetId);
                 if (retryElement) {
-                  const headerElement = document.querySelector('header') || 
-                                     document.querySelector('nav') ||
-                                     document.querySelector('[data-header]');
-                  const headerHeight = headerElement ? headerElement.offsetHeight + 20 : 100;
+                  const headerElement = document.querySelector('[data-header]') as HTMLElement;
+                  const headerHeight = headerElement ? headerElement.offsetHeight + 20 : 80;
                   
                   const elementPosition = retryElement.getBoundingClientRect().top;
                   const offsetPosition = elementPosition + window.pageYOffset - headerHeight;
