@@ -20,30 +20,19 @@
       "skipDelayDuration": 300,
       "items": [
         {
-          "title": "AI Generator",
-          "url": "/#ai_generator",
-          "icon": "RiSparkling2Line",
+          "title": "Free Qwen Image",
+          "url": "/",
+          "icon": "RiHomeLine",
           "trigger": "hover",
           "highlightOnHover": true,
           "align": "start",
           "sideOffset": 4,
           "children": [
             {
-              "title": "Free Qwen Image Generator",
+              "title": "AI Generator",
               "url": "/#ai_generator",
               "description": "Create stunning images with advanced AI"
-            }
-          ]
-        },
-        {
-          "title": "About",
-          "url": "/#introduce",
-          "icon": "RiInformationLine",
-          "trigger": "hover",
-          "highlightOnHover": true,
-          "align": "center",
-          "sideOffset": 4,
-          "children": [
+            },
             {
               "title": "What is Qwen Image Generation?",
               "url": "/#introduce",
@@ -53,20 +42,9 @@
               "title": "Unleash Your Creativity",
               "url": "/#benefit",
               "description": "The Endless Possibilities of Qwen Image AI"
-            }
-          ]
-        },
-        {
-          "title": "Features",
-          "url": "/#feature",
-          "icon": "RiStarLine",
-          "trigger": "hover",
-          "highlightOnHover": true,
-          "align": "center",
-          "sideOffset": 4,
-          "children": [
+            },
             {
-              "title": "Qwen Image vs. Other AI Generators",
+              "title": "Features & Comparison",
               "url": "/#feature",
               "description": "Why Choose Our Qwen Image Model?"
             },
@@ -74,22 +52,43 @@
               "title": "Usage Statistics",
               "url": "/#stats",
               "description": "Users Love Our Free Qwen Image Generator"
+            },
+            {
+              "title": "FAQ",
+              "url": "/#faq",
+              "description": "Everything you need to know about creating Qwen images"
             }
           ]
         },
         {
-          "title": "Help",
-          "url": "/#faq",
-          "icon": "RiQuestionLine",
+          "title": "AI EFFECTS",
+          "url": "/new-page/AI-EFFECTS",
+          "icon": "RiVideoLine",
+          "trigger": "hover",
+          "highlightOnHover": true,
+          "align": "center",
+          "sideOffset": 4,
+          "children": [
+            {
+              "title": "AI Kissing Video Generator",
+              "url": "/new-page/AI-EFFECTS",
+              "description": "Create stunning AI kissing videos with romantic effects"
+            }
+          ]
+        },
+        {
+          "title": "Image Editor",
+          "url": "/new-page/image-editor",
+          "icon": "RiImageEditLine",
           "trigger": "hover",
           "highlightOnHover": true,
           "align": "end",
           "sideOffset": 4,
           "children": [
             {
-              "title": "Your Questions about Free Qwen Image Answered",
-              "url": "/#faq",
-              "description": "Everything you need to know about creating Qwen images"
+              "title": "AI Watermark Remover",
+              "url": "/new-page/image-editor",
+              "description": "Remove watermarks with our free AI watermark remover"
             }
           ]
         }
@@ -308,23 +307,13 @@
     "nav": {
       "items": [
         {
-          "title": "Qwen Images",
+          "title": "Free Qwen Image",
           "children": [
             {
-              "title": "Generate Images",
+              "title": "AI Generator",
               "url": "/#ai_generator",
               "target": "_self"
             },
-            {
-              "title": "Qwen Image vs. Other AI Generators",
-              "url": "/#feature",
-              "target": "_self"
-            }
-          ]
-        },
-        {
-          "title": "Learn More",
-          "children": [
             {
               "title": "What is Qwen Image Generation?",
               "url": "/#introduce",
@@ -334,20 +323,40 @@
               "title": "Unleash Your Creativity",
               "url": "/#benefit",
               "target": "_self"
+            },
+            {
+              "title": "Features & Comparison",
+              "url": "/#feature",
+              "target": "_self"
+            },
+            {
+              "title": "Usage Statistics",
+              "url": "/#stats",
+              "target": "_self"
+            },
+            {
+              "title": "FAQ",
+              "url": "/#faq",
+              "target": "_self"
             }
           ]
         },
         {
-          "title": "Support",
+          "title": "AI EFFECTS",
           "children": [
             {
-              "title": "Your Questions about Free Qwen Image Answered",
-              "url": "/#faq",
+              "title": "AI Kissing Video Generator",
+              "url": "/new-page/AI-EFFECTS",
               "target": "_self"
-            },
+            }
+          ]
+        },
+        {
+          "title": "Image Editor",
+          "children": [
             {
-              "title": "Users Love Our Free Qwen Image Generator",
-              "url": "/#stats",
+              "title": "AI Watermark Remover",
+              "url": "/new-page/image-editor",
               "target": "_self"
             }
           ]

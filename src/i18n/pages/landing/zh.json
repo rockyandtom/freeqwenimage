@@ -20,30 +20,19 @@
       "skipDelayDuration": 300,
       "items": [
         {
-          "title": "AI 生成器",
-          "url": "/#ai_generator",
-          "icon": "RiSparkling2Line",
+          "title": "免费Qwen图片",
+          "url": "/",
+          "icon": "RiHomeLine",
           "trigger": "hover",
           "highlightOnHover": true,
           "align": "start",
           "sideOffset": 4,
           "children": [
             {
-              "title": "免费 Qwen 图片生成器",
+              "title": "AI 生成器",
               "url": "/#ai_generator",
               "description": "使用先进的AI技术创建精美图片"
-            }
-          ]
-        },
-        {
-          "title": "产品介绍",
-          "url": "/#introduce",
-          "icon": "RiInformationLine",
-          "trigger": "hover",
-          "highlightOnHover": true,
-          "align": "center",
-          "sideOffset": 4,
-          "children": [
+            },
             {
               "title": "什么是免费Qwen图片生成器",
               "url": "/#introduce",
@@ -53,43 +42,53 @@
               "title": "为什么选择我们",
               "url": "/#benefit",
               "description": "了解我们的优势和特色"
+            },
+            {
+              "title": "核心功能对比",
+              "url": "/#feature",
+              "description": "了解所有强大功能和优势"
+            },
+            {
+              "title": "使用统计",
+              "url": "/#stats",
+              "description": "查看平台数据统计"
+            },
+            {
+              "title": "常见问题",
+              "url": "/#faq",
+              "description": "快速找到问题答案"
             }
           ]
         },
         {
-          "title": "核心功能",
-          "url": "/#feature",
-          "icon": "RiStarLine",
+          "title": "AI特效",
+          "url": "/new-page/AI-EFFECTS",
+          "icon": "RiVideoLine",
           "trigger": "hover",
           "highlightOnHover": true,
           "align": "center",
           "sideOffset": 4,
           "children": [
             {
-              "title": "Qwen图片生成器核心功能",
-              "url": "/#feature",
-              "description": "了解所有强大功能"
-            },
-            {
-              "title": "使用统计",
-              "url": "/#stats",
-              "description": "查看平台数据统计"
+              "title": "AI亲吻视频生成器",
+              "url": "/new-page/AI-EFFECTS",
+              "description": "创建令人惊艳的AI亲吻视频特效"
             }
           ]
         },
         {
-          "title": "帮助中心",
-          "url": "/#faq",
-          "icon": "RiQuestionLine",
+          "title": "图片编辑器",
+          "url": "/new-page/image-editor",
+          "icon": "RiImageEditLine",
           "trigger": "hover",
           "highlightOnHover": true,
           "align": "end",
           "sideOffset": 4,
           "children": [
             {
-              "title": "常见问题",
-              "url": "/#faq",
-              "description": "快速找到问题答案"
+              "title": "AI水印去除工具",
+              "url": "/new-page/image-editor",
+              "description": "免费AI水印去除工具，轻松清理图片"
             }
           ]
         }
@@ -287,25 +286,15 @@
     "nav": {
       "items": [
         {
-          "title": "Qwen 图片",
+          "title": "免费Qwen图片",
           "children": [
             {
-              "title": "生成图片",
+              "title": "AI 生成器",
               "url": "/#ai_generator",
               "target": "_self"
             },
             {
-              "title": "功能特点",
-              "url": "/#feature",
-              "target": "_self"
-            }
-          ]
-        },
-        {
-          "title": "了解更多",
-          "children": [
-            {
-              "title": "产品介绍",
+              "title": "什么是免费Qwen图片生成器",
               "url": "/#introduce",
               "target": "_self"
             },
@@ -313,20 +302,40 @@
               "title": "为什么选择我们",
               "url": "/#benefit",
               "target": "_self"
-            }
-          ]
-        },
-        {
-          "title": "帮助",
-          "children": [
+            },
             {
-              "title": "常见问题",
-              "url": "/#faq",
+              "title": "核心功能对比",
+              "url": "/#feature",
               "target": "_self"
             },
             {
               "title": "使用统计",
               "url": "/#stats",
+              "target": "_self"
+            },
+            {
+              "title": "常见问题",
+              "url": "/#faq",
+              "target": "_self"
+            }
+          ]
+        },
+        {
+          "title": "AI特效",
+          "children": [
+            {
+              "title": "AI亲吻视频生成器",
+              "url": "/new-page/AI-EFFECTS",
+              "target": "_self"
+            }
+          ]
+        },
+        {
+          "title": "图片编辑器",
+          "children": [
+            {
+              "title": "AI水印去除工具",
+              "url": "/new-page/image-editor",
               "target": "_self"
             }
           ]
