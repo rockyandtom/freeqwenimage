@@ -1,0 +1,73 @@
+# 图像特效API测试文件
+# 测试新接入的RunningHub图像特效应用API
+
+### 1. 提交图像特效处理任务（文件上传）
+POST http://localhost:3000/api/runninghubAPI/image-effects
+Content-Type: multipart/form-data; boundary=----WebKitFormBoundary7MA4YWxkTrZu0gW
+
+------WebKitFormBoundary7MA4YWxkTrZu0gW
+Content-Disposition: form-data; name="file"; filename="test-image.png"
+Content-Type: image/png
+
+< ./test-image.png
+------WebKitFormBoundary7MA4YWxkTrZu0gW--
+
+### 1b. 提交图像特效处理任务（使用已上传文件ID）
+POST http://localhost:3000/api/runninghubAPI/image-effects
+Content-Type: application/json
+
+{
+  "image": "api/8af4154e057e7db6278697ccca3be52e928c6df451afd850973f5cf4f05cde10.png"
+}
+
+### 2. 查询任务状态 (需要替换实际的taskId)
+POST http://localhost:3000/api/runninghubAPI/image-effects/status
+Content-Type: application/json
+
+{
+  "taskId": "替换为实际的任务ID"
+}
+
+### 3. 使用GET方法查询缓存状态 (需要替换实际的taskId)
+GET http://localhost:3000/api/runninghubAPI/image-effects?taskId=替换为实际的任务ID
+
+### 4. 调试模式查询状态 (需要替换实际的taskId)
+GET http://localhost:3000/api/runninghubAPI/image-effects?taskId=替换为实际的任务ID&debug=true
+
+### 示例：直接测试RunningHub API
+POST https://www.runninghub.cn/task/openapi/ai-app/run
+Host: www.runninghub.cn
+Content-Type: application/json
+
+{
+    "webappId": "1955923521295798274",
+    "apiKey": "fb88fac46b0349c1986c9cbb4f14d44e",
+    "nodeInfoList": [
+        {
+            "nodeId": "220",
+            "fieldName": "image",
+            "fieldValue": "8af4154e057e7db6278697ccca3be52e928c6df451afd850973f5cf4f05cde10.png",
+            "description": "image"
+        }
+    ]
+}
+
+### 测试任务状态查询 (需要替换实际的taskId)
+POST https://www.runninghub.cn/task/openapi/status
+Host: www.runninghub.cn
+Content-Type: application/json
+
+{
+    "apiKey": "fb88fac46b0349c1986c9cbb4f14d44e",
+    "taskId": "替换为实际的任务ID"
+}
+
+### 测试任务结果获取 (需要替换实际的taskId)
+POST https://www.runninghub.cn/task/openapi/outputs
+Host: www.runninghub.cn
+Content-Type: application/json
+
+{
+    "apiKey": "fb88fac46b0349c1986c9cbb4f14d44e",
+    "taskId": "替换为实际的任务ID"
+}

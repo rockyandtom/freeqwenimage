@@ -24,6 +24,12 @@ const randomPrompts = [
   "Underwater coral reef with tropical fish and vibrant colors"
 ]
 
+const applications = [
+  { label: "Image Generator", value: "image-generator", api: "/api/runninghubAPI" },
+  { label: "Image Watermark Removal", value: "watermark-removal", api: "/api/runninghubAPI/image-effects" },
+  { label: "Background Removal", value: "background-removal", api: "/api/runninghubAPI/background-removal" }
+]
+
 export default function AIImageGenerator() {
   const [prompt, setPrompt] = React.useState("")
   const [aspectRatio, setAspectRatio] = React.useState("1:1")
@@ -32,6 +38,9 @@ export default function AIImageGenerator() {
   const [isGenerating, setIsGenerating] = React.useState(false)
   const [generatedImage, setGeneratedImage] = React.useState<string | null>(null)
   const [error, setError] = React.useState<string | null>(null)
+  const [selectedApp, setSelectedApp] = React.useState("image-generator")
+  const [uploadedImage, setUploadedImage] = React.useState<File | null>(null)
+  const [imagePreview, setImagePreview] = React.useState<string | null>(null)
 
   const handleClear = () => {
     setPrompt("")
@@ -40,6 +49,20 @@ export default function AIImageGenerator() {
     setShowNegativePrompt(false)
     setGeneratedImage(null)
     setError(null)
+    setUploadedImage(null)
+    setImagePreview(null)
+  }
+
+  const handleImageUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0]
+    if (file) {
+      setUploadedImage(file)
+      const reader = new FileReader()
+      reader.onload = (e) => {
+        setImagePreview(e.target?.result as string)
+      }
+      reader.readAsDataURL(file)
+    }
   }
 
   const handleRandom = () => {
@@ -48,9 +71,24 @@ export default function AIImageGenerator() {
   }
 
   const handleGenerate = async () => {
-    if (!prompt.trim()) {
-      alert("Please enter a description")
+    const selectedApplication = applications.find(app => app.value === selectedApp)
+    
+    if (!selectedApplication) {
+      alert("Please select an application")
       return
+    }
+
+    // 根据不同应用验证不同的输入
+    if (selectedApp === "image-generator") {
+      if (!prompt.trim()) {
+        alert("Please enter a description")
+        return
+      }
+    } else if (selectedApp === "watermark-removal" || selectedApp === "background-removal") {
+      if (!uploadedImage) {
+        alert("Please upload an image")
+        return
+      }
     }
 
     setIsGenerating(true)
@@ -58,18 +96,56 @@ export default function AIImageGenerator() {
     setGeneratedImage(null)
 
     try {
-      // 第一步：提交图像生成任务
-      console.log('提交图像生成任务...')
-      const response = await fetch('/api/runninghubAPI', {
+      // 根据选择的应用提交任务
+      console.log(`提交${selectedApplication.label}任务...`)
+      
+      let requestBody: any
+      if (selectedApp === "image-generator") {
+        requestBody = {
+          prompt: prompt.trim(),
+          aspectRatio,
+          negativePrompt: showNegativePrompt ? negativePrompt.trim() : ""
+        }
+      } else if (selectedApp === "watermark-removal" || selectedApp === "background-removal") {
+        if (!uploadedImage) {
+          throw new Error("No image uploaded")
+        }
+        // 对于图片上传，我们直接发送FormData到API
+        // API会处理文件上传和任务提交
+        const formData = new FormData()
+        formData.append('file', uploadedImage)
+        
+        // 对于图生图应用，我们发送FormData而不是JSON
+        const response = await fetch(selectedApplication.api, {
+          method: 'POST',
+          body: formData // 直接发送FormData，不设置Content-Type
+        })
+
+        const result = await response.json()
+        console.log('任务提交响应:', result)
+
+        if (!response.ok) {
+          throw new Error(result.error || 'Failed to submit generation task')
+        }
+
+        if (result.success && result.data && result.data.taskId) {
+          const taskId = result.data.taskId
+          console.log(`任务提交成功，TaskID: ${taskId}，开始轮询状态...`)
+          
+          // 第二步：开始轮询任务状态
+          await pollTaskStatus(taskId)
+        } else {
+          throw new Error('Invalid response from task submission')
+        }
+        return // 直接返回，不继续执行后面的逻辑
+      }
+      
+      const response = await fetch(selectedApplication.api, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify({
-          prompt: prompt.trim(),
-          aspectRatio,
-          negativePrompt: showNegativePrompt ? negativePrompt.trim() : ""
-        }),
+        body: JSON.stringify(requestBody),
       })
 
       const result = await response.json()
@@ -108,7 +184,17 @@ export default function AIImageGenerator() {
         const elapsedMinutes = (attempt * delayMs) / 60000
         console.log(`轮询任务状态 ${taskId}, 尝试 ${attempt}/${maxAttempts} (已等待 ${elapsedMinutes.toFixed(1)} 分钟)`)
 
-        const statusResponse = await fetch('/api/runninghubAPI/status', {
+        // 根据选择的应用调用不同的状态API
+        const selectedApplication = applications.find(app => app.value === selectedApp)
+        let statusApiUrl = '/api/runninghubAPI/status' // 默认文生图状态API
+        
+        if (selectedApp === "watermark-removal") {
+          statusApiUrl = '/api/runninghubAPI/image-effects/status'
+        } else if (selectedApp === "background-removal") {
+          statusApiUrl = '/api/runninghubAPI/background-removal/status'
+        }
+
+        const statusResponse = await fetch(statusApiUrl, {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
@@ -120,11 +206,12 @@ export default function AIImageGenerator() {
         console.log('状态检查响应:', statusResult)
 
         if (statusResponse.ok && statusResult.success && statusResult.data) {
-          const { status, imageUrl } = statusResult.data
+          const { status, imageUrl, resultUrl } = statusResult.data
 
-          if (status === 'completed' && imageUrl) {
-            console.log('图像生成完成!', imageUrl)
-            setGeneratedImage(imageUrl)
+          if (status === 'completed' && (imageUrl || resultUrl)) {
+            const finalUrl = imageUrl || resultUrl
+            console.log(`${selectedApplication?.label}完成!`, finalUrl)
+            setGeneratedImage(finalUrl)
             setIsGenerating(false)
             return
           } else if (status === 'running' || status === 'unknown') {
@@ -170,77 +257,154 @@ export default function AIImageGenerator() {
 
       {/* 主要输入区域 */}
       <div className="bg-card border border-border rounded-lg p-6 space-y-6">
-        {/* 1. 提示词 */}
+        {/* 1. 输入内容 */}
         <div>
           <label className="text-sm font-medium text-foreground mb-2 block">
-            Prompt Description
+            {(selectedApp === "watermark-removal" || selectedApp === "background-removal") ? "Upload Image" : "Prompt Description"}
           </label>
-          <Textarea
-            placeholder="What would you like to see?"
-            value={prompt}
-            onChange={(e) => setPrompt(e.target.value)}
-            className="min-h-[100px] resize-none"
-          />
+          
+          {(selectedApp === "watermark-removal" || selectedApp === "background-removal") ? (
+            // 图片上传组件
+            <div className="space-y-4">
+              <div className="border-2 border-dashed border-border rounded-lg p-6 text-center">
+                <input
+                  type="file"
+                  accept="image/*"
+                  onChange={handleImageUpload}
+                  className="hidden"
+                  id="image-upload"
+                />
+                <label
+                  htmlFor="image-upload"
+                  className="cursor-pointer flex flex-col items-center gap-2"
+                >
+                  <div className="w-12 h-12 bg-muted rounded-lg flex items-center justify-center">
+                    <svg className="w-6 h-6 text-muted-foreground" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
+                    </svg>
+                  </div>
+                  <div>
+                    <p className="text-sm font-medium">Click to upload image</p>
+                    <p className="text-xs text-muted-foreground">PNG, JPG, JPEG up to 10MB</p>
+                  </div>
+                </label>
+              </div>
+              
+              {imagePreview && (
+                <div className="relative">
+                  <img
+                    src={imagePreview}
+                    alt="Preview"
+                    className="w-full max-w-md mx-auto rounded-lg border"
+                  />
+                  <button
+                    onClick={() => {
+                      setUploadedImage(null)
+                      setImagePreview(null)
+                    }}
+                    className="absolute top-2 right-2 bg-red-500 text-white rounded-full w-6 h-6 flex items-center justify-center text-xs hover:bg-red-600"
+                  >
+                    ×
+                  </button>
+                </div>
+              )}
+            </div>
+          ) : (
+            // 文本输入组件
+            <Textarea
+              placeholder="What would you like to see?"
+              value={prompt}
+              onChange={(e) => setPrompt(e.target.value)}
+              className="min-h-[100px] resize-none"
+            />
+          )}
         </div>
 
-        {/* 2. 宽高比 */}
+        {/* 2. 宽高比 - 只在图像生成模式下显示 */}
+        {selectedApp === "image-generator" && (
+          <div>
+            <label className="text-sm font-medium text-foreground mb-2 block">
+              Aspect Ratio
+            </label>
+            <div className="flex flex-wrap gap-2">
+              {aspectRatios.map((ratio) => (
+                <button
+                  key={ratio.value}
+                  onClick={() => setAspectRatio(ratio.value)}
+                  className={cn(
+                    "px-4 py-2 rounded-md border text-sm font-medium transition-colors",
+                    aspectRatio === ratio.value
+                      ? "bg-primary text-primary-foreground border-primary"
+                      : "bg-background border-border hover:bg-accent hover:text-accent-foreground"
+                  )}
+                >
+                  {ratio.label}
+                </button>
+              ))}
+            </div>
+          </div>
+        )}
+
+        {/* 应用选择 */}
         <div>
           <label className="text-sm font-medium text-foreground mb-2 block">
-            Aspect Ratio
+            Application
           </label>
           <div className="flex flex-wrap gap-2">
-            {aspectRatios.map((ratio) => (
+            {applications.map((app) => (
               <button
-                key={ratio.value}
-                onClick={() => setAspectRatio(ratio.value)}
+                key={app.value}
+                onClick={() => setSelectedApp(app.value)}
                 className={cn(
                   "px-4 py-2 rounded-md border text-sm font-medium transition-colors",
-                  aspectRatio === ratio.value
+                  selectedApp === app.value
                     ? "bg-primary text-primary-foreground border-primary"
                     : "bg-background border-border hover:bg-accent hover:text-accent-foreground"
                 )}
               >
-                {ratio.label}
+                {app.label}
               </button>
             ))}
           </div>
         </div>
 
-        {/* 3. 负面提示词开关 */}
-        <div>
-          <div className="flex items-center gap-2 mb-2">
-            <button
-              onClick={() => setShowNegativePrompt(!showNegativePrompt)}
-              className={cn(
-                "text-sm font-medium transition-colors",
-                showNegativePrompt ? "text-foreground" : "text-muted-foreground"
-              )}
-            >
-              Negative Prompt
-            </button>
-            <div 
-              onClick={() => setShowNegativePrompt(!showNegativePrompt)}
-              className={cn(
-                "w-8 h-4 rounded-full border cursor-pointer transition-colors",
-                showNegativePrompt ? "bg-primary border-primary" : "bg-input border-border"
-              )}
-            >
-              <div className={cn(
-                "w-3 h-3 rounded-full bg-white transition-transform duration-200",
-                showNegativePrompt ? "translate-x-4" : "translate-x-0.5",
-                "mt-0.5"
-              )} />
+        {/* 3. 负面提示词开关 - 只在图像生成模式下显示 */}
+        {selectedApp === "image-generator" && (
+          <div>
+            <div className="flex items-center gap-2 mb-2">
+              <button
+                onClick={() => setShowNegativePrompt(!showNegativePrompt)}
+                className={cn(
+                  "text-sm font-medium transition-colors",
+                  showNegativePrompt ? "text-foreground" : "text-muted-foreground"
+                )}
+              >
+                Negative Prompt
+              </button>
+              <div 
+                onClick={() => setShowNegativePrompt(!showNegativePrompt)}
+                className={cn(
+                  "w-8 h-4 rounded-full border cursor-pointer transition-colors",
+                  showNegativePrompt ? "bg-primary border-primary" : "bg-input border-border"
+                )}
+              >
+                <div className={cn(
+                  "w-3 h-3 rounded-full bg-white transition-transform duration-200",
+                  showNegativePrompt ? "translate-x-4" : "translate-x-0.5",
+                  "mt-0.5"
+                )} />
+              </div>
             </div>
+            
+            {showNegativePrompt && (
+              <Input
+                placeholder="What you don't want to see..."
+                value={negativePrompt}
+                onChange={(e) => setNegativePrompt(e.target.value)}
+              />
+            )}
           </div>
-          
-          {showNegativePrompt && (
-            <Input
-              placeholder="What you don't want to see..."
-              value={negativePrompt}
-              onChange={(e) => setNegativePrompt(e.target.value)}
-            />
-          )}
-        </div>
+        )}
       </div>
 
       {/* 操作按钮 */}
@@ -263,10 +427,14 @@ export default function AIImageGenerator() {
 
         <Button
           onClick={handleGenerate}
-          disabled={isGenerating || !prompt.trim()}
+          disabled={isGenerating || (selectedApp === "image-generator" ? !prompt.trim() : !uploadedImage)}
           className="flex-1 sm:flex-none bg-primary text-primary-foreground hover:bg-primary/90"
         >
-          {isGenerating ? "Generating..." : "Generate"}
+          {isGenerating 
+            ? ((selectedApp === "watermark-removal" || selectedApp === "background-removal") ? "Processing..." : "Generating...") 
+            : (selectedApp === "watermark-removal" ? "Remove Watermark" : 
+               selectedApp === "background-removal" ? "Remove Background" : "Generate")
+          }
         </Button>
       </div>
 
