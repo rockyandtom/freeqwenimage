@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server';
-import { checkTaskStatus, checkTaskResult } from '../../api';
+import { checkTaskStatus, checkTaskResult } from '../../../api';
 
 export async function GET(
   request: NextRequest,
