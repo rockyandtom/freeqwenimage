@@ -1,14 +1,11 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { checkTaskStatus, checkTaskResult } from '../../api';
 
-type RouteContext = {
-  params: {
-    taskId: string;
-  };
-};
-
-export async function GET(request: NextRequest, context: RouteContext) {
-  const { taskId } = context.params;
+export async function GET(
+  request: NextRequest,
+  { params }: { params: { taskId: string } }
+) {
+  const taskId = params.taskId;
 
   if (!taskId) {
     return NextResponse.json({ error: 'Task ID is required' }, { status: 400 });

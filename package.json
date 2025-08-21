@@ -6,7 +6,7 @@
   "description": "Free Qwen Image - AI-powered text-to-image generator based on Qwen model",
   "homepage": "https://freeqwenimage.com",
   "scripts": {
-    "dev": "cross-env NODE_NO_WARNINGS=1 next dev --turbopack",
+    "dev": "cross-env NODE_NO_WARNINGS=1 next dev",
     "build": "next build",
     "start": "NODE_NO_WARNINGS=1 next start",
     "lint": "next lint",
