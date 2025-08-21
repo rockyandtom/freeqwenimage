@@ -1,8 +1,8 @@
-import { NextResponse } from 'next/server';
+import { NextRequest, NextResponse } from 'next/server';
 import { checkTaskStatus, checkTaskResult } from '../../api';
 
 export async function GET(
-  request: Request,
+  request: NextRequest,
   { params }: { params: { taskId: string } }
 ) {
   const taskId = params.taskId;
