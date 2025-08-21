@@ -21,7 +21,7 @@ const nextConfig = {
     remotePatterns: [
       {
         protocol: "https",
-        hostname: "*",
+        hostname: "rh-images.xiaoyaoyou.com",
       },
     ],
     formats: ["image/webp", "image/avif"],

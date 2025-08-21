@@ -1,6 +1,7 @@
 import { Metadata } from "next";
 import HeroBg from "@/components/blocks/hero/bg";
 import { Badge } from "@/components/ui/badge";
+import { ImageToVideoTool } from "@/components/ImageToVideoTool";
 
 interface PageProps {
   params: Promise<{ locale: string }>;
@@ -58,6 +59,18 @@ export default async function AIEffectsPage({ params }: PageProps) {
               Create stunning AI kissing videos for free with free qwen image. Our AI Kissing Video Generator Free uses advanced AI to add AI video effects to your clips.
             </p>
           </div>
+
+          {/* Image to Video Tool */}
+          <section id="image-to-video-tool" className="py-16">
+            <div className="container">
+              <h2 className="mb-6 text-pretty text-3xl font-bold lg:text-4xl text-center">
+                Try Our AI Kissing Video Generator Free
+              </h2>
+              <div className="max-w-4xl mx-auto">
+                <ImageToVideoTool />
+              </div>
+            </div>
+          </section>
 
           {/* Content Sections */}
           <div className="space-y-16">

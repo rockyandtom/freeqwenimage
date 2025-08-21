@@ -89,6 +89,11 @@
               "title": "AI Watermark Remover",
               "url": "/new-page/image-editor",
               "description": "Remove watermarks with our free AI watermark remover"
+            },
+            {
+              "title": "Qwen Image Edit",
+              "url": "/new-page/image-editor/qwen-image-edit",
+              "description": "Advanced AI image editing with Qwen technology"
             }
           ]
         }
@@ -357,6 +362,11 @@
             {
               "title": "AI Watermark Remover",
               "url": "/new-page/image-editor",
+              "target": "_self"
+            },
+            {
+              "title": "Qwen Image Edit",
+              "url": "/new-page/image-editor/qwen-image-edit",
               "target": "_self"
             }
           ]

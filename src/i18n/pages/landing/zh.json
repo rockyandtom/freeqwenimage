@@ -89,6 +89,11 @@
               "title": "AI水印去除工具",
               "url": "/new-page/image-editor",
               "description": "免费AI水印去除工具，轻松清理图片"
+            },
+            {
+              "title": "Qwen图片编辑",
+              "url": "/new-page/image-editor/qwen-image-edit",
+              "description": "使用Qwen技术的先进AI图片编辑"
             }
           ]
         }
@@ -336,6 +341,11 @@
             {
               "title": "AI水印去除工具",
               "url": "/new-page/image-editor",
+              "target": "_self"
+            },
+            {
+              "title": "Qwen图片编辑",
+              "url": "/new-page/image-editor/qwen-image-edit",
               "target": "_self"
             }
           ]
