@@ -14,7 +14,7 @@ export async function POST(req: Request) {
     if (result.success) {
       return NextResponse.json({ success: true, data: { status: result.status, progress: result.progress } });
     } else {
-      return NextResponse.json({ success: false, error: result.error || 'Failed to get status' }, { status: 500 });
+      return NextResponse.json({ success: false, error: 'Failed to get status' }, { status: 500 });
     }
   } catch (error: any) {
     return NextResponse.json({ success: false, error: error.message }, { status: 500 });

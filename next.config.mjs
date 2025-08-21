@@ -8,7 +8,7 @@ const withBundleAnalyzer = bundleAnalyzer({
   enabled: process.env.ANALYZE === "true",
 });
 
-const withNextIntl = createNextIntlPlugin();
+const withNextIntl = createNextIntlPlugin('./src/i18n/request.ts');
 
 /** @type {import('next').NextConfig} */
 const nextConfig = {
@@ -94,4 +94,4 @@ const nextConfig = {
   },
 };
 
-export default withBundleAnalyzer(withNextIntl(withMDX(nextConfig)));
+export default withNextIntl(withMDX(nextConfig));
