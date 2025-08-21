@@ -94,12 +94,4 @@ const nextConfig = {
   },
 };
 
-// Make sure experimental mdx flag is enabled
-const configWithMDX = {
-  ...nextConfig,
-  experimental: {
-    mdxRs: true,
-  },
-};
-
-export default withBundleAnalyzer(withNextIntl(withMDX(configWithMDX)));
+export default withBundleAnalyzer(withNextIntl(withMDX(nextConfig)));
