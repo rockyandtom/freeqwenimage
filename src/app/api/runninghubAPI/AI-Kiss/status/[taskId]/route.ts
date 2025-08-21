@@ -3,9 +3,9 @@ import { checkTaskStatus, checkTaskResult } from '../../../api';
 
 export async function GET(
   request: NextRequest,
-  { params }: { params: { taskId: string } }
+  context: { params: { taskId: string } }
 ) {
-  const taskId = params.taskId;
+  const taskId = context.params.taskId;
 
   if (!taskId) {
     return NextResponse.json({ error: 'Task ID is required' }, { status: 400 });
