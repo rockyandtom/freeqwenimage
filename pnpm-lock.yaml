@@ -27,7 +27,7 @@ importers:
         specifier: ^0.1.10
         version: 0.1.10(zod@3.24.1)
       '@devnomic/marquee':
-        specifier: ^1.0.2
+        specifier: 1.0.2
         version: 1.0.2
       '@dnd-kit/core':
         specifier: ^6.3.1

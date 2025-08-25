@@ -94,6 +94,11 @@
               "title": "Qwen图片编辑",
               "url": "/new-page/image-editor/qwen-image-edit",
               "description": "使用Qwen技术的先进AI图片编辑"
+            },
+            {
+              "title": "AI图片增强器",
+              "url": "/new-page/image-editor/AI-Image-Enhancer",
+              "description": "使用AI技术增强和提升图片质量"
             }
           ]
         }
@@ -346,6 +351,11 @@
             {
               "title": "Qwen图片编辑",
               "url": "/new-page/image-editor/qwen-image-edit",
+              "target": "_self"
+            },
+            {
+              "title": "AI图片增强器",
+              "url": "/new-page/image-editor/AI-Image-Enhancer",
               "target": "_self"
             }
           ]

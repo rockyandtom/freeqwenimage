@@ -94,4 +94,4 @@ const nextConfig = {
   },
 };
 
-export default withNextIntl(withMDX(nextConfig));
+export default withBundleAnalyzer(withNextIntl(withMDX(nextConfig)));

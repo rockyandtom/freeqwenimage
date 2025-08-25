@@ -2,7 +2,7 @@ import "@/app/globals.css";
 
 import { MdOutlineHome } from "react-icons/md";
 import { Metadata } from "next";
-import React from "react";
+import { type ReactNode } from "react";
 import { getTranslations } from "next-intl/server";
 
 export async function generateMetadata(): Promise<Metadata> {
@@ -21,7 +21,7 @@ export async function generateMetadata(): Promise<Metadata> {
 export default function LegalLayout({
   children,
 }: {
-  children: React.ReactNode;
+  children: ReactNode;
 }) {
   return (
     <div>

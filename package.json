@@ -16,7 +16,11 @@
     "db:migrate": "npx drizzle-kit migrate --config=src/db/config.ts",
     "db:studio": "npx drizzle-kit studio --config=src/db/config.ts",
     "db:push": "npx drizzle-kit push --config=src/db/config.ts",
-    "postinstall": "fumadocs-mdx"
+    "postinstall": "fumadocs-mdx",
+    "test:env": "node scripts/test-env.js",
+    "test:api": "node scripts/test-api.js",
+    "test:curl": "node scripts/test-curl-match.js",
+    "verify": "node scripts/final-verification.js"
   },
   "dependencies": {
     "@ai-sdk/deepseek": "^0.1.11",
@@ -25,7 +29,7 @@
     "@ai-sdk/provider": "^1.0.8",
     "@ai-sdk/provider-utils": "^2.0.7",
     "@ai-sdk/replicate": "^0.1.10",
-    "@devnomic/marquee": "^1.0.2",
+    "@devnomic/marquee": "1.0.2",
     "@dnd-kit/core": "^6.3.1",
     "@dnd-kit/modifiers": "^9.0.0",
     "@dnd-kit/sortable": "^10.0.0",

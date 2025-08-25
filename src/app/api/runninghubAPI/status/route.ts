@@ -1,143 +1,134 @@
-import { NextRequest, NextResponse } from 'next/server'
+import { NextResponse } from 'next/server';
+import type { 
+  RunningHubOutputItem, 
+  RunningHubOutputsResponse, 
+  RunningHubStatusResponse,
+  ApiResponse 
+} from '@/types/runninghub';
 
-export async function POST(request: NextRequest) {
+export async function POST(request: Request) {
   try {
-    const { taskId } = await request.json()
+    const body = await request.json();
+    const { taskId } = body;
 
     if (!taskId) {
-      return NextResponse.json(
-        { error: 'Task ID is required' },
-        { status: 400 }
-      )
+      return new NextResponse('Task ID is required', { status: 400 });
     }
 
-    console.log(`查询任务状态: ${taskId}`)
-
-    // 查询任务状态的API（根据RunningHub文档）
-    const statusUrl = `https://www.runninghub.cn/task/openapi/status`
-    
-    const statusResponse = await fetch(statusUrl, {
+    const response = await fetch('https://www.runninghub.cn/task/openapi/status', {
       method: 'POST',
       headers: {
-        'Host': 'www.runninghub.cn',
         'Content-Type': 'application/json',
+        'Host': 'www.runninghub.cn'
       },
       body: JSON.stringify({
-        apiKey: "fb88fac46b0349c1986c9cbb4f14d44e",
-        taskId: taskId
-      })
-    })
+        apiKey: process.env.RUNNINGHUB_API_KEY,
+        taskId: taskId,
+      }),
+    });
 
-    if (!statusResponse.ok) {
-      throw new Error(`Status query failed with HTTP ${statusResponse.status}`)
+    if (!response.ok) {
+      const errorText = await response.text();
+      console.error("RunningHub Status API error:", errorText);
+      return new NextResponse(`Error from RunningHub Status API: ${errorText}`, { status: response.status });
     }
 
-    const statusData = await statusResponse.json()
-    console.log('任务状态响应:', statusData)
+    const result = await response.json();
     
-    // 根据RunningHub文档的实际API响应结构处理
-    if (statusData.code === 0 && statusData.data) {
-      const status = statusData.data; // data字段直接是状态字符串
-      
-      // 根据文档，状态值映射
-      if (status === 'SUCCESS' || status === 'COMPLETED') {
-        console.log('任务已完成，获取结果...')
+    if (result.code === 0) {
+        let status = 'UNKNOWN';
+        let progress = 0;
         
-        // 调用outputs API获取结果
-        const outputResponse = await fetch('https://www.runninghub.cn/task/openapi/outputs', {
-          method: 'POST',
-          headers: {
-            'Host': 'www.runninghub.cn',
-            'Content-Type': 'application/json',
-          },
-          body: JSON.stringify({
-            apiKey: "fb88fac46b0349c1986c9cbb4f14d44e",
-            taskId: taskId
-          })
-        })
-        
-        if (outputResponse.ok) {
-          const outputData = await outputResponse.json()
-          console.log('任务结果响应:', outputData)
-          
-          if (outputData.code === 0 && outputData.data && Array.isArray(outputData.data)) {
-            // 提取图像URL（根据文档格式）
-            const imageItem = outputData.data.find((item: any) => 
-              item.fileUrl && (
-                !item.fileType ||
-                item.fileType.toLowerCase().includes('png') || 
-                item.fileType.toLowerCase().includes('jpg') || 
-                item.fileType.toLowerCase().includes('jpeg')
-              )
-            )
-            
-            if (imageItem && imageItem.fileUrl) {
-              return NextResponse.json({
-                success: true,
-                data: {
-                  taskId,
-                  status: 'completed',
-                  imageUrl: imageItem.fileUrl
-                }
-              })
+        // 根据 API 指南处理不同格式的状态数据
+        if (typeof result.data === 'string') {
+            const upperStatus = result.data.toUpperCase();
+            if (upperStatus === 'SUCCESS' || upperStatus === 'COMPLETED') {
+                status = 'COMPLETED';
+                progress = 100;
+            } else if (upperStatus === 'RUNNING' || upperStatus === 'PENDING') {
+                status = 'RUNNING';
+                progress = 50; // 默认进度
+            } else if (upperStatus === 'FAILED' || upperStatus === 'ERROR') {
+                status = 'ERROR';
             } else {
-              return NextResponse.json({
-                success: false,
-                error: 'Task completed but no valid image found in results'
-              }, { status: 500 })
+                status = result.data;
             }
-          } else {
-            return NextResponse.json({
-              success: false,
-              error: 'Failed to get task results'
-            }, { status: 500 })
-          }
-        } else {
-          return NextResponse.json({
-            success: false,
-            error: 'Failed to fetch task results'
-          }, { status: 500 })
+        } else if (result.data && typeof result.data === 'object') {
+            status = result.data.status || 'UNKNOWN';
+            progress = result.data.progress || 0;
         }
-        
-      } else if (status === 'FAILED' || status === 'ERROR') {
-        return NextResponse.json({
-          success: false,
-          error: 'Task failed on RunningHub'
-        }, { status: 500 })
-      } else if (status === 'RUNNING' || status === 'PENDING') {
-        return NextResponse.json({
-          success: true,
-          data: {
-            taskId,
-            status: 'running',
-            message: `任务正在处理中，状态: ${status}`
-          }
-        })
-      } else {
-        return NextResponse.json({
-          success: true,
-          data: {
-            taskId,
-            status: 'unknown',
-            message: `未知状态: ${status}，继续等待`
-          }
-        })
-      }
+
+        // 如果任务完成，获取结果
+        if (status === 'COMPLETED') {
+            const outputsResponse = await fetch('https://www.runninghub.cn/task/openapi/outputs', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Host': 'www.runninghub.cn'
+                },
+                body: JSON.stringify({
+                    apiKey: process.env.RUNNINGHUB_API_KEY,
+                    taskId: taskId,
+                }),
+            });
+
+            if (outputsResponse.ok) {
+                const outputsText = await outputsResponse.text();
+                let outputsResult: RunningHubOutputsResponse;
+                
+                try {
+                    outputsResult = JSON.parse(outputsText) as RunningHubOutputsResponse;
+                } catch (parseError) {
+                    console.error("Failed to parse outputs response:", outputsText);
+                    return NextResponse.json({ success: false, error: `Invalid outputs response: ${outputsText}` });
+                }
+
+                if (outputsResult.code === 0 && outputsResult.data && outputsResult.data.length > 0) {
+                    // 根据 API 指南，过滤图像文件
+                    const images = outputsResult.data
+                        .filter((item: RunningHubOutputItem) => 
+                            item.fileUrl && (
+                                !item.fileType ||
+                                item.fileType.toLowerCase().includes('png') || 
+                                item.fileType.toLowerCase().includes('jpg') || 
+                                item.fileType.toLowerCase().includes('jpeg')
+                            )
+                        )
+                        .map((item: RunningHubOutputItem) => item.fileUrl);
+                    
+                    if (images.length > 0) {
+                        return NextResponse.json({ 
+                            success: true, 
+                            data: { 
+                                status: 'completed', 
+                                resultUrl: images[0],
+                                progress: 100
+                            } 
+                        });
+                    }
+                }
+                
+                return NextResponse.json({ success: false, error: outputsResult.msg || 'No valid images found in result' });
+            } else {
+                const errorText = await outputsResponse.text();
+                return NextResponse.json({ success: false, error: `Failed to get task result: ${errorText}` });
+            }
+        } else {
+            // 任务还在进行中或失败
+            return NextResponse.json({ 
+                success: true, 
+                data: { 
+                    status: status.toLowerCase(), 
+                    progress: progress 
+                } 
+            });
+        }
     } else {
-      return NextResponse.json({
-        success: false,
-        error: `Status query failed: ${statusData.msg || 'Unknown error'}`
-      }, { status: 500 })
+        return NextResponse.json({ success: false, error: result.msg || 'Failed to get task status' });
     }
 
   } catch (error) {
-    console.error('Status check error:', error)
-    return NextResponse.json(
-      { 
-        error: 'Failed to check task status',
-        details: error instanceof Error ? error.message : 'Unknown error'
-      },
-      { status: 500 }
-    )
+    console.error('Error in status API route:', error);
+    return new NextResponse('Internal Server Error', { status: 500 });
   }
 }
