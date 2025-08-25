@@ -35,7 +35,7 @@ export async function POST(request: Request) {
 
     const apiResponse: ApiResponse<{ fileId: string }> = { 
       success: true, 
-      fileId: result.data?.fileName || '' 
+      data: { fileId: result.data?.fileName || '' }
     };
 
     return NextResponse.json(apiResponse);
