@@ -16,17 +16,12 @@ const nextConfig = {
   reactStrictMode: process.env.NODE_ENV === "production",
   pageExtensions: ["ts", "tsx", "js", "jsx", "md", "mdx"],
   
-  // 生产环境优化
+  // 生产环境优化 - 简化配置避免兼容性问题
   experimental: {
-    optimizeCss: process.env.NODE_ENV === "production",
     optimizePackageImports: [
       "@radix-ui/react-icons",
       "lucide-react",
-      "@radix-ui/react-dialog",
-      "@radix-ui/react-dropdown-menu",
-      "@radix-ui/react-toast",
     ],
-    webVitalsAttribution: ["CLS", "LCP"],
   },
   
   // 图片优化配置
