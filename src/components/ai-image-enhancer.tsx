@@ -42,53 +42,27 @@ export default function AiImageEnhancer() {
     setGeneratedImage(null);
 
     try {
-      // Step 1: Upload image
       const formData = new FormData();
       formData.append('file', uploadedImage);
 
-      const uploadResponse = await fetch('/api/runninghubAPI/upload', {
+      const response = await fetch('/api/runninghubAPI/upload', {
         method: 'POST',
         body: formData,
       });
 
-      if (!uploadResponse.ok) {
-        const errorText = await uploadResponse.text();
-        throw new Error(`Upload failed: ${errorText}`);
+      const result = await response.json();
+
+      if (!response.ok) {
+        throw new Error(result.error || 'Failed to start enhancement task');
       }
 
-      const uploadResult = await uploadResponse.json();
-
-      if (!uploadResult.success || !uploadResult.fileId) {
-        throw new Error(uploadResult.error || 'Failed to upload image');
+      if (result.success && result.taskId) {
+        toast.info("Enhancement process started");
+        pollTaskStatus(result.taskId);
+      } else {
+        throw new Error(result.error || 'Failed to get task ID');
       }
-
-      // Step 2: Create enhancement task
-      const taskResponse = await fetch('/api/runninghubAPI/Image-Enhancer', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-          imageUrl: uploadResult.fileId,
-        }),
-      });
-
-      if (!taskResponse.ok) {
-        const errorText = await taskResponse.text();
-        throw new Error(`Task creation failed: ${errorText}`);
-      }
-
-      const taskResult = await taskResponse.json();
-
-      if (taskResult.code !== 0 || !taskResult.data?.taskId) {
-        throw new Error(taskResult.msg || 'Failed to create enhancement task');
-      }
-
-      toast.info("Enhancement process started");
-      pollTaskStatus(taskResult.data.taskId);
-
     } catch (error) {
-      console.error('Enhancement error:', error);
       setError(error instanceof Error ? error.message : 'Unknown error occurred');
       setIsGenerating(false);
     }

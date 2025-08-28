@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Photo Effects API 测试</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 20px; }
+        .log { background: #f5f5f5; padding: 10px; margin: 10px 0; border-radius: 5px; }
+        .success { color: green; }
+        .error { color: red; }
+        .info { color: blue; }
+    </style>
+</head>
+<body>
+    <h1>Photo Effects API 测试</h1>
+    <button onclick="testPhotoEffects()">测试 Photo Effects 流程</button>
+    <div id="log"></div>
+
+    <script>
+        function log(message, type = 'info') {
+            const logDiv = document.getElementById('log');
+            const div = document.createElement('div');
+            div.className = `log ${type}`;
+            div.textContent = `${new Date().toLocaleTimeString()}: ${message}`;
+            logDiv.appendChild(div);
+        }
+
+        async function testPhotoEffects() {
+            try {
+                log('开始测试 Photo Effects 流程', 'info');
+                
+                // 1. 测试上传API
+                log('步骤1: 测试上传API', 'info');
+                const uploadFormData = new FormData();
+                const testImageBlob = new Blob(['test'], { type: 'image/png' });
+                const testFile = new File([testImageBlob], 'test.png', { type: 'image/png' });
+                uploadFormData.append('file', testFile);
+                
+                const uploadResponse = await fetch('/api/runninghubAPI/upload', {
+                    method: 'POST',
+                    body: uploadFormData
+                });
+                
+                if (!uploadResponse.ok) {
+                    throw new Error(`上传失败: ${uploadResponse.status}`);
+                }
+                
+                const uploadResult = await uploadResponse.json();
+                log(`上传结果: ${JSON.stringify(uploadResult)}`, 'info');
+                
+                if (!uploadResult.success) {
+                    throw new Error(`上传失败: ${uploadResult.error}`);
+                }
+                
+                const fileId = uploadResult.data.fileId;
+                log(`上传成功，文件ID: ${fileId}`, 'success');
+                
+                // 2. 测试Photo Effects API
+                log('步骤2: 测试Photo Effects API', 'info');
+                const photoEffectsResponse = await fetch('/api/runninghubAPI/photo-effects', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({ imageUrl: fileId })
+                });
+                
+                if (!photoEffectsResponse.ok) {
+                    throw new Error(`Photo Effects API失败: ${photoEffectsResponse.status}`);
+                }
+                
+                const photoEffectsResult = await photoEffectsResponse.json();
+                log(`Photo Effects结果: ${JSON.stringify(photoEffectsResult)}`, 'info');
+                
+                if (!photoEffectsResult.success) {
+                    throw new Error(`Photo Effects API失败: ${photoEffectsResult.error}`);
+                }
+                
+                const taskId = photoEffectsResult.data.taskId;
+                log(`Photo Effects API成功，任务ID: ${taskId}`, 'success');
+                
+                // 3. 测试状态检查API
+                log('步骤3: 测试状态检查API', 'info');
+                const statusResponse = await fetch('/api/runninghubAPI/status', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({ taskId })
+                });
+                
+                if (!statusResponse.ok) {
+                    throw new Error(`状态检查失败: ${statusResponse.status}`);
+                }
+                
+                const statusResult = await statusResponse.json();
+                log(`状态检查结果: ${JSON.stringify(statusResult)}`, 'info');
+                
+                if (!statusResult.success) {
+                    throw new Error(`状态检查失败: ${statusResult.error}`);
+                }
+                
+                log(`状态检查成功，状态: ${statusResult.data.status}`, 'success');
+                log(`进度: ${statusResult.data.progress}%`, 'success');
+                
+                if (statusResult.data.resultUrl) {
+                    log(`结果URL: ${statusResult.data.resultUrl}`, 'success');
+                }
+                
+                log('所有API测试通过！', 'success');
+                
+            } catch (error) {
+                log(`测试失败: ${error.message}`, 'error');
+                console.error('测试错误:', error);
+            }
+        }
+    </script>
+</body>
+</html>

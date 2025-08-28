@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Upload Test</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        .upload-area {
+            border: 2px dashed #ccc;
+            padding: 20px;
+            text-align: center;
+            margin: 20px 0;
+            cursor: pointer;
+        }
+        .upload-area:hover {
+            border-color: #007bff;
+        }
+        .result {
+            margin: 20px 0;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+        .success {
+            background-color: #d4edda;
+            border-color: #c3e6cb;
+        }
+        .error {
+            background-color: #f8d7da;
+            border-color: #f5c6cb;
+        }
+        button {
+            background-color: #007bff;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+    <h1>Photo Effects Upload Test</h1>
+    
+    <div class="upload-area" onclick="document.getElementById('fileInput').click()">
+        <p>点击选择图片文件</p>
+        <input type="file" id="fileInput" accept="image/*" style="display: none;" onchange="handleFileSelect(event)">
+    </div>
+    
+    <button onclick="testPhotoEffects()" id="testBtn" disabled>测试Photo Effects API</button>
+    
+    <div id="result"></div>
+    
+    <script>
+        let uploadedFileId = null;
+        
+        async function handleFileSelect(event) {
+            const file = event.target.files[0];
+            if (!file) return;
+            
+            console.log('Selected file:', file);
+            
+            const formData = new FormData();
+            formData.append('file', file);
+            
+            try {
+                const response = await fetch('/api/runninghubAPI/upload', {
+                    method: 'POST',
+                    body: formData
+                });
+                
+                const result = await response.json();
+                console.log('Upload result:', result);
+                
+                if (result.success) {
+                    uploadedFileId = result.data.fileId;
+                    showResult('上传成功！文件ID: ' + uploadedFileId, 'success');
+                    document.getElementById('testBtn').disabled = false;
+                } else {
+                    showResult('上传失败: ' + result.error, 'error');
+                }
+            } catch (error) {
+                console.error('Upload error:', error);
+                showResult('上传错误: ' + error.message, 'error');
+            }
+        }
+        
+        async function testPhotoEffects() {
+            if (!uploadedFileId) {
+                showResult('请先上传图片', 'error');
+                return;
+            }
+            
+            try {
+                const response = await fetch('/api/runninghubAPI/photo-effects', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({ imageUrl: uploadedFileId })
+                });
+                
+                const result = await response.json();
+                console.log('Photo Effects result:', result);
+                
+                if (result.success) {
+                    showResult('Photo Effects API调用成功！任务ID: ' + result.data.taskId, 'success');
+                } else {
+                    showResult('Photo Effects API调用失败: ' + result.error, 'error');
+                }
+            } catch (error) {
+                console.error('Photo Effects error:', error);
+                showResult('Photo Effects错误: ' + error.message, 'error');
+            }
+        }
+        
+        function showResult(message, type) {
+            const resultDiv = document.getElementById('result');
+            resultDiv.innerHTML = '<div class="result ' + type + '">' + message + '</div>';
+        }
+    </script>
+</body>
+</html>

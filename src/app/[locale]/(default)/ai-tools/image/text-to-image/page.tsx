@@ -1,0 +1,186 @@
+import { type Metadata } from "next";
+import { Badge } from "@/components/ui/badge";
+import ToolLoader from "@/components/tools/_base/tool-loader";
+import { Suspense, lazy } from "react";
+
+// 懒加载组件
+const HeroBg = lazy(() => import("@/components/blocks/hero/bg"));
+const ToolNavigation = lazy(() => import("@/components/ai-tools/tool-navigation"));
+
+export const metadata: Metadata = {
+  title: "Free AI Text to Image Generator - FreeQwenImage",
+  description: "Generate stunning images from text descriptions using advanced AI. Free, fast, and professional quality results. No registration required.",
+  keywords: ["text to image", "AI image generator", "free AI art", "text to art", "AI image creation"],
+};
+
+const content = {
+  "H1_Main_Title": "AI Text to Image Generator: Transform Words into Stunning Visuals",
+  "H1_Sub_Title": "Create professional-quality images from simple text descriptions using advanced AI technology. Completely free and no registration required.",
+  "Tool_Title": "Try Our Free Text to Image Generator",
+  "Content_Sections": [
+    {
+      "H2_Subtitle": "How AI Text to Image Generation Works",
+      "Paragraphs": [
+        "Our **Text to Image Generator** uses state-of-the-art artificial intelligence to transform your written descriptions into stunning visual artwork. Simply describe what you want to see, and our AI will create a unique image based on your prompt.",
+        "The AI model has been trained on millions of images and can understand complex descriptions, artistic styles, and visual concepts. Whether you need **photorealistic images**, **digital art**, **illustrations**, or **creative concepts**, our tool delivers professional-quality results in seconds."
+      ]
+    },
+    {
+      "H2_Subtitle": "Perfect for Creative Professionals and Enthusiasts",
+      "Paragraphs": [
+        "Whether you're a **graphic designer**, **content creator**, **marketer**, or just someone who loves to create, our Text to Image tool is perfect for bringing your ideas to life. Generate concept art, social media content, blog illustrations, or personal artwork.",
+        "Our AI understands various artistic styles including **photorealistic**, **oil painting**, **watercolor**, **digital art**, **anime**, **cartoon**, and many more. You can also specify technical details like lighting, composition, and camera angles for precise results."
+      ]
+    },
+    {
+      "H2_Subtitle": "Advanced Features and Capabilities",
+      "Paragraphs": [
+        "Our **Text to Image Generator** supports detailed prompts with multiple elements, style specifications, and quality modifiers. You can describe complex scenes, specify artistic styles, mention famous artists for style reference, and include technical photography terms.",
+        "The AI can generate images in various formats and styles: **portraits**, **landscapes**, **abstract art**, **product mockups**, **character designs**, **architectural visualizations**, and much more. Each generation is unique and tailored to your specific description."
+      ]
+    }
+  ],
+  "FAQ_Section": {
+    "Title": "Frequently Asked Questions about Text to Image AI",
+    "Subtitle": "Everything you need to know about our AI-powered text to image generator.",
+    "FAQs": [
+      {
+        "Question": "How does the AI Text to Image generator work?",
+        "Answer": "Our **Text to Image AI** uses advanced machine learning models trained on millions of images and their descriptions. When you provide a text prompt, the AI analyzes your description and generates a unique image that matches your requirements. The process typically takes 10-30 seconds depending on complexity."
+      },
+      {
+        "Question": "Is the Text to Image generator completely free?",
+        "Answer": "Yes, our **Text to Image Generator** is completely free to use. There are no hidden fees, no registration required, and no limits on the number of images you can generate. We believe in making AI art accessible to everyone."
+      },
+      {
+        "Question": "What kind of images can I generate?",
+        "Answer": "You can generate virtually any type of image: **photorealistic photos**, **digital artwork**, **illustrations**, **concept art**, **character designs**, **landscapes**, **portraits**, **abstract art**, and much more. The AI understands various artistic styles and can create images in different formats and compositions."
+      },
+      {
+        "Question": "How do I write effective prompts for better results?",
+        "Answer": "For best results, be specific and descriptive. Include details about **style** (photorealistic, oil painting, digital art), **composition** (close-up, wide shot, portrait), **lighting** (soft, dramatic, natural), **colors**, and **mood**. Add quality keywords like 'high quality', 'detailed', or 'professional' for enhanced results."
+      },
+      {
+        "Question": "Can I use the generated images commercially?",
+        "Answer": "The images generated by our AI tool can typically be used for personal and commercial purposes. However, we recommend checking our terms of service for specific usage rights and any restrictions that may apply to commercial use."
+      },
+      {
+        "Question": "What image formats and sizes are supported?",
+        "Answer": "Our **Text to Image Generator** produces high-quality images in standard web formats. The AI generates images optimized for various uses including social media, web content, print materials, and digital artwork. You can download the full-resolution images directly."
+      }
+    ]
+  }
+};
+
+export default function TextToImagePage() {
+  return (
+    <>
+      <Suspense fallback={<div className="fixed inset-0 bg-gradient-to-br from-background to-muted" />}>
+        <HeroBg />
+      </Suspense>
+      <section className="py-24">
+        <div className="container">
+          {/* Hero Section */}
+          <div className="text-center mb-16">
+            <Badge className="mb-4">AI Image Generator</Badge>
+            <h1 className="mx-auto mb-6 max-w-6xl text-balance text-4xl font-bold lg:mb-7 lg:text-7xl">
+              {content.H1_Main_Title}
+            </h1>
+            <p className="mx-auto max-w-3xl text-muted-foreground lg:text-xl">
+              {content.H1_Sub_Title}
+            </p>
+          </div>
+
+          {/* Tool Section */}
+          <section id="text-to-image-tool" className="py-16">
+            <div className="container">
+              <h2 className="mb-6 text-pretty text-3xl font-bold lg:text-4xl text-center">
+                {content.Tool_Title}
+              </h2>
+              <div className="max-w-4xl mx-auto">
+                <ToolLoader toolId="text-to-image" />
+              </div>
+            </div>
+          </section>
+
+          {/* Content Sections */}
+          <div className="space-y-16">
+            {content.Content_Sections.map((section, index) => (
+              <section key={index} id={`section-${index + 1}`} className="py-16">
+                <div className="container">
+                  <h2 className="mb-6 text-pretty text-3xl font-bold lg:text-4xl">
+                    {section.H2_Subtitle}
+                  </h2>
+                  <div className="max-w-xl text-muted-foreground lg:max-w-none lg:text-lg space-y-6">
+                    {section.Paragraphs.map((paragraph, pIndex) => (
+                      <p key={pIndex}
+                         dangerouslySetInnerHTML={{ __html: paragraph.replace(/\*\*(.*?)\*\*/g, '<strong class="font-bold text-foreground">$1</strong>') }}></p>
+                    ))}
+                  </div>
+                </div>
+              </section>
+            ))}
+          </div>
+
+          {/* FAQ Section */}
+          <section id="faq" className="py-16">
+            <div className="container">
+              <div className="text-center">
+                <Badge className="text-xs font-medium">FAQ</Badge>
+                <h2 className="mt-4 text-4xl font-semibold">
+                  {content.FAQ_Section.Title}
+                </h2>
+                <p className="mt-6 font-medium text-muted-foreground">
+                  {content.FAQ_Section.Subtitle}
+                </p>
+              </div>
+              <div className="mx-auto mt-14 grid gap-8 md:grid-cols-2 md:gap-12">
+                {content.FAQ_Section.FAQs.map((faq, index) => (
+                  <div key={index} className="flex gap-4">
+                    <span className="flex size-6 shrink-0 items-center justify-center rounded-sm border border-primary font-mono text-xs text-primary">{index + 1}</span>
+                    <div>
+                      <div className="mb-2 flex items-center justify-between">
+                        <h3 className="font-semibold">{faq.Question}</h3>
+                      </div>
+                      <p className="text-md text-muted-foreground"
+                         dangerouslySetInnerHTML={{ __html: faq.Answer.replace(/\*\*(.*?)\*\*/g, '<strong class="font-bold text-foreground">$1</strong>') }}></p>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </section>
+
+          {/* Tool Navigation */}
+          <Suspense fallback={<div className="h-32 bg-muted animate-pulse rounded-lg" />}>
+            <ToolNavigation currentTool="text-to-image" />
+          </Suspense>
+
+          {/* CTA Section */}
+          <section className="py-20">
+            <div className="px-8">
+              <div className='flex items-center justify-center rounded-2xl bg-[url("/imgs/masks/circle.svg")] bg-cover bg-center px-8 py-12 text-center md:p-16'>
+                <div className="mx-auto max-w-2xl">
+                  <h2 className="mb-4 text-balance text-3xl font-semibold md:text-5xl">
+                    Ready to Create Amazing AI Art?
+                  </h2>
+                  <p className="text-muted-foreground md:text-lg mb-8">
+                    Transform your ideas into stunning visuals with our free AI-powered text to image generator.
+                  </p>
+                  <div className="flex flex-col sm:flex-row gap-4 justify-center">
+                    <a href="#text-to-image-tool" className="inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 bg-primary text-primary-foreground hover:bg-primary/90 h-10 px-4 py-2">
+                      Start Creating - It's Free!
+                    </a>
+                    <a href="/ai-tools" className="inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 border border-input bg-background hover:bg-accent hover:text-accent-foreground h-10 px-4 py-2">
+                      Explore More AI Tools
+                    </a>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </section>
+        </div>
+      </section>
+    </>
+  );
+}

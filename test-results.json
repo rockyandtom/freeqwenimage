@@ -1,0 +1,52 @@
+{
+  "timestamp": "2025-08-26T14:38:10.592Z",
+  "summary": {
+    "total": 8,
+    "passed": 3,
+    "failed": 5,
+    "skipped": 0,
+    "successRate": 37.5
+  },
+  "details": [
+    {
+      "name": "Environment variable RUNNINGHUB_API_KEY",
+      "status": "PASS",
+      "details": "fb88fac46b..."
+    },
+    {
+      "name": "Environment variable RUNNINGHUB_WEBAPP_ID",
+      "status": "PASS",
+      "details": "1958797744..."
+    },
+    {
+      "name": "Environment variable RUNNINGHUB_NODE_ID",
+      "status": "PASS",
+      "details": "2..."
+    },
+    {
+      "name": "Server connection",
+      "status": "FAIL",
+      "details": "Server not responding"
+    },
+    {
+      "name": "Tools List",
+      "status": "FAIL",
+      "details": "fetch failed"
+    },
+    {
+      "name": "Tools Categories",
+      "status": "FAIL",
+      "details": "fetch failed"
+    },
+    {
+      "name": "Tools Stats",
+      "status": "FAIL",
+      "details": "fetch failed"
+    },
+    {
+      "name": "Specific Tool Info",
+      "status": "FAIL",
+      "details": "fetch failed"
+    }
+  ]
+}

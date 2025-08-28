@@ -63,7 +63,7 @@ export default function Header({ header }: { header: HeaderType }) {
         <nav className="hidden justify-between lg:flex">
           <div className="flex items-center gap-6">
             <Link
-              href={(header.brand?.url as any) || "/"}
+              href={header.brand?.url || "/"}
               className="flex items-center gap-2"
             >
               {header.brand?.logo?.src && (
@@ -215,6 +215,9 @@ export default function Header({ header }: { header: HeaderType }) {
                   );
                 }
 
+                if (!item.url) {
+                  return null;
+                }
                 return (
                   <NavLink
                     key={i}
@@ -224,7 +227,7 @@ export default function Header({ header }: { header: HeaderType }) {
                         variant: "ghost",
                       })
                     )}
-                    href={item.url as any}
+                    href={item.url}
                     target={item.target}
                   >
                     {item.icon && (
@@ -244,10 +247,13 @@ export default function Header({ header }: { header: HeaderType }) {
             {header.show_theme && <ThemeToggle />}
 
             {header.buttons?.map((item, i) => {
+              if (!item.url) {
+                return null;
+              }
               return (
                 <Button key={i} variant={item.variant}>
                   <Link
-                    href={item.url as any}
+                    href={item.url}
                     target={item.target || ""}
                     className="flex items-center gap-1 cursor-pointer"
                   >
@@ -266,7 +272,7 @@ export default function Header({ header }: { header: HeaderType }) {
         <div className="block lg:hidden">
           <div className="flex items-center justify-between">
             <Link
-              href={(header.brand?.url || "/") as any}
+              href={header.brand?.url || "/"}
               className="flex items-center gap-2"
             >
               {header.brand?.logo?.src && (
@@ -292,7 +298,7 @@ export default function Header({ header }: { header: HeaderType }) {
                 <SheetHeader>
                   <SheetTitle>
                     <Link
-                      href={(header.brand?.url || "/") as any}
+                      href={header.brand?.url || "/"}
                       className="flex items-center gap-2"
                     >
                       {header.brand?.logo?.src && (
@@ -324,40 +330,48 @@ export default function Header({ header }: { header: HeaderType }) {
                               {item.title}
                             </AccordionTrigger>
                             <AccordionContent className="mt-2">
-                              {item.children.map((iitem, ii) => (
-                                <NavLink
-                                  key={ii}
-                                  className={cn(
-                                    "flex select-none gap-4 rounded-md p-3 leading-none outline-hidden transition-colors hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground"
-                                  )}
-                                  href={iitem.url as any}
-                                  target={iitem.target}
-                                  onClick={handleMobileNavClick}
-                                >
-                                  {iitem.icon && (
-                                    <Icon
-                                      name={iitem.icon}
-                                      className="size-4 shrink-0"
-                                    />
-                                  )}
-                                  <div>
-                                    <div className="text-sm font-semibold">
-                                      {iitem.title}
+                              {item.children.map((iitem, ii) => {
+                                if (!iitem.url) {
+                                  return null;
+                                }
+                                return (
+                                  <NavLink
+                                    key={ii}
+                                    className={cn(
+                                      "flex select-none gap-4 rounded-md p-3 leading-none outline-hidden transition-colors hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground"
+                                    )}
+                                    href={iitem.url}
+                                    target={iitem.target}
+                                    onClick={handleMobileNavClick}
+                                  >
+                                    {iitem.icon && (
+                                      <Icon
+                                        name={iitem.icon}
+                                        className="size-4 shrink-0"
+                                      />
+                                    )}
+                                    <div>
+                                      <div className="text-sm font-semibold">
+                                        {iitem.title}
+                                      </div>
+                                      <p className="text-sm leading-snug text-muted-foreground">
+                                        {iitem.description}
+                                      </p>
                                     </div>
-                                    <p className="text-sm leading-snug text-muted-foreground">
-                                      {iitem.description}
-                                    </p>
-                                  </div>
-                                </NavLink>
-                              ))}
+                                  </NavLink>
+                                );
+                              })}
                             </AccordionContent>
                           </AccordionItem>
                         );
                       }
+                      if (!item.url) {
+                        return null;
+                      }
                       return (
                         <NavLink
                           key={i}
-                          href={item.url as any}
+                          href={item.url}
                           target={item.target}
                           className="font-semibold my-4 flex items-center gap-2 px-4"
                           onClick={handleMobileNavClick}
@@ -378,10 +392,13 @@ export default function Header({ header }: { header: HeaderType }) {
                 <div className="border-t pt-4">
                   <div className="mt-2 flex flex-col gap-3">
                     {header.buttons?.map((item, i) => {
+                      if (!item.url) {
+                        return null;
+                      }
                       return (
                         <Button key={i} variant={item.variant}>
                           <Link
-                            href={item.url as any}
+                            href={item.url}
                             target={item.target || ""}
                             className="flex items-center gap-1"
                           >

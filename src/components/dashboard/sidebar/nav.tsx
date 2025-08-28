@@ -31,7 +31,7 @@ export default function Nav({ nav }: { nav: NavType }) {
               >
                 {item.url ? (
                   <Link
-                    href={item.url as any}
+                    href={item.url}
                     target={item.target}
                     className="w-full flex items-center gap-2 cursor-pointer"
                   >

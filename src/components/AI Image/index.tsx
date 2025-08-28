@@ -507,6 +507,41 @@ export default function AIImageGenerator() {
           </div>
         </div>
       )}
+
+      {/* 工具集合页面入口 */}
+      <div className="text-center py-8 border-t border-border">
+        <div className="space-y-4">
+          <h3 className="text-lg font-semibold text-foreground">
+            Discover More AI Tools
+          </h3>
+          <p className="text-muted-foreground text-sm max-w-md mx-auto">
+            Explore our complete collection of AI-powered tools for image enhancement, transformation, and video creation.
+          </p>
+          <div className="flex flex-col sm:flex-row gap-3 justify-center">
+            <Button
+              variant="outline"
+              onClick={() => window.location.href = '/ai-tools'}
+              className="flex-1 sm:flex-none"
+            >
+              🎨 All AI Tools
+            </Button>
+            <Button
+              variant="outline"
+              onClick={() => window.location.href = '/ai-tools/image'}
+              className="flex-1 sm:flex-none"
+            >
+              🖼️ Image Tools
+            </Button>
+            <Button
+              variant="outline"
+              onClick={() => window.location.href = '/ai-tools/video'}
+              className="flex-1 sm:flex-none"
+            >
+              🎬 Video Tools
+            </Button>
+          </div>
+        </div>
+      </div>
     </div>
   )
 }

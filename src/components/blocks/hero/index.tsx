@@ -32,7 +32,7 @@ export default function Hero({ hero }: { hero: HeroType }) {
             </div>
           )}
           <div className="text-center">
-            {hero.announcement && (
+            {hero.announcement && hero.announcement.url && (
               <Link
                 href={hero.announcement.url as any}
                 className="mx-auto mb-3 inline-flex items-center gap-3 rounded-full border px-2 py-1 text-sm"
@@ -65,6 +65,7 @@ export default function Hero({ hero }: { hero: HeroType }) {
             {hero.buttons && (
               <div className="mt-8 flex flex-col justify-center gap-4 sm:flex-row">
                 {hero.buttons.map((item, i) => {
+                  if (!item.url) return null;
                   return (
                     <Link
                       key={i}

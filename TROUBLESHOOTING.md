@@ -1,8 +1,8 @@
-# AI Image Enhancer 故障排除指南
+# FreeQwenImage AI Tools Platform 故障排除指南
 
 ## 概述
 
-本指南基于 [RunningHub API 官方文档](runninghub-api-guide.md) 提供完整的故障排除方案。
+本指南为 FreeQwenImage AI 工具平台提供全面的故障排除方案，涵盖所有 AI 工具（文生图、图生图、图像增强、图生视频）的常见问题和解决方案。
 
 ## 快速诊断
 
@@ -10,57 +10,203 @@
 
 ```bash
 # 检查环境变量配置
-npm run test:env
+pnpm test:env
 
-# 测试完整的 API 流程（需要先启动开发服务器）
-npm run dev  # 在另一个终端窗口
-npm run test:api
+# 测试所有 API 端点（需要先启动开发服务器）
+pnpm dev  # 在另一个终端窗口
+pnpm test:api
+
+# 测试特定工具
+pnpm test:tools
+
+# 运行完整测试套件
+pnpm test:all
+```
+
+### 2. 平台健康检查
+
+```bash
+# 检查平台集成状态
+node scripts/verify-platform.js
+
+# 测试工具导航
+node scripts/test-tool-navigation.js
+
+# 验证 API 路由
+node scripts/test-api-routes.js
 ```
 
 ## 常见问题与解决方案
 
-### 问题 1: "Enhancement ErrorUnexpected token 'A', "APIKEY_USE"... is not valid JSON"
+### 问题 1: API 连接错误 - "Unexpected token 'A', "APIKEY_USE"... is not valid JSON"
 
 **根本原因**: RunningHub API 返回了非 JSON 格式的错误响应，通常是因为 API 密钥配置问题。
+
+**影响工具**: 所有 AI 工具（文生图、图生图、图像增强、图生视频）
 
 **解决步骤**:
 
 1. **检查环境变量**:
    ```bash
-   npm run test:env
+   pnpm test:env
    ```
 
 2. **确保 `.env.development` 文件包含正确配置**:
    ```env
-   RUNNINGHUB_API_KEY=fb88fac46b0349c1986c9cbb4f14d44e
-   RUNNINGHUB_WEBAPP_ID=1958797744955613186
-   RUNNINGHUB_NODE_ID=2
+   RUNNINGHUB_API_URL=https://api.runninghub.ai
+   RUNNINGHUB_API_KEY=your_api_key
+   RUNNINGHUB_WEBAPP_ID=your_webapp_id
    ```
 
 3. **重启开发服务器**:
    ```bash
    # 停止当前服务器 (Ctrl+C)
-   npm run dev
+   pnpm dev
    ```
 
 4. **验证修复**:
    ```bash
-   npm run test:api
+   pnpm test:api
    ```
 
-### 问题 2: 文件上传失败
+### 问题 2: 工具页面无法访问 - 404 错误
+
+**根本原因**: 路由配置问题或页面文件缺失。
+
+**解决步骤**:
+
+1. **检查路由结构**:
+   ```
+   src/app/[locale]/(default)/ai-tools/
+   ├── page.tsx                    # 工具集合页面
+   ├── image/
+   │   ├── text-to-image/page.tsx
+   │   ├── image-to-image/page.tsx
+   │   ├── image-enhancer/page.tsx
+   │   └── page.tsx
+   └── video/
+       ├── image-to-video/page.tsx
+       └── page.tsx
+   ```
+
+2. **验证工具配置**:
+   ```bash
+   # 检查工具配置是否正确
+   node -e "console.log(require('./src/config/tools.ts'))"
+   ```
+
+3. **测试导航**:
+   ```bash
+   node scripts/test-tool-navigation.js
+   ```
+
+### 问题 3: 特定工具功能异常
+
+#### 3.1 文生图 (Text-to-Image) 问题
+
+**常见症状**:
+- 提示词无法提交
+- 生成过程卡住
+- 结果图像不显示
+
+**解决方案**:
+
+1. **检查 API 端点**:
+   ```bash
+   curl -X POST http://localhost:3000/api/runninghubAPI/text-to-image \
+     -H "Content-Type: application/json" \
+     -d '{"prompt":"test prompt"}'
+   ```
+
+2. **验证 Node ID**: 确保使用正确的 Node ID (文生图通常为 `1`)
+
+3. **检查提示词长度**: 确保提示词不超过限制（通常 < 500 字符）
+
+#### 3.2 图生图 (Image-to-Image) 问题
+
+**常见症状**:
+- 图像上传失败
+- 转换参数无效
+- 处理时间过长
+
+**解决方案**:
+
+1. **检查图像格式**:
+   - 支持格式: PNG, JPG, JPEG, WebP
+   - 最大大小: 10MB
+   - 推荐尺寸: 512x512 到 2048x2048
+
+2. **测试上传功能**:
+   ```bash
+   curl -X POST http://localhost:3000/api/runninghubAPI/upload \
+     -F "file=@test-image.jpg"
+   ```
+
+3. **验证转换参数**:
+   ```javascript
+   // 检查参数范围
+   strength: 0.1 - 1.0  // 转换强度
+   guidance: 1.0 - 20.0 // 引导强度
+   steps: 10 - 50       // 生成步数
+   ```
+
+#### 3.3 图像增强 (Image Enhancer) 问题
+
+**常见症状**:
+- 增强效果不明显
+- 处理失败
+- 结果质量差
+
+**解决方案**:
+
+1. **检查输入图像质量**:
+   - 避免过度压缩的图像
+   - 确保图像清晰度足够
+   - 推荐最小尺寸: 256x256
+
+2. **调整增强参数**:
+   ```javascript
+   // 优化参数设置
+   scaleFactor: 2 - 4    // 放大倍数
+   denoiseLevel: 0.1 - 0.9 // 降噪级别
+   ```
+
+#### 3.4 图生视频 (Image-to-Video) 问题
+
+**常见症状**:
+- 视频生成失败
+- 处理时间极长
+- 视频质量差
+
+**解决方案**:
+
+1. **优化输入图像**:
+   - 使用高质量图像
+   - 确保主体清晰
+   - 避免过于复杂的场景
+
+2. **调整视频参数**:
+   ```javascript
+   // 推荐参数
+   duration: 3 - 10      // 视频时长（秒）
+   fps: 12 - 30         // 帧率
+   quality: 'medium'    // 质量设置
+   ```
+
+### 问题 4: 文件上传失败
 
 **可能原因**:
 - 使用了错误的 API 端点
 - 文件格式不支持
 - 文件大小超限
+- 网络连接问题
 
 **解决方案**:
 
-1. **检查 API 端点**: 确保使用 `/task/openapi/upload`，不是 `/task/openapi/file/upload`
+1. **检查 API 端点**: 确保使用正确的上传端点 `/api/runninghubAPI/upload`
 
 2. **文件要求**:
-   - 支持格式: PNG, JPG, JPEG
+   - 支持格式: PNG, JPG, JPEG, WebP
    - 最大大小: 10MB
    - 确保文件未损坏
 
@@ -69,6 +215,11 @@ npm run test:api
    curl -X POST http://localhost:3000/api/runninghubAPI/upload \
      -F "file=@test-image.jpg"
    ```
+
+4. **检查浏览器兼容性**:
+   - 确保浏览器支持 File API
+   - 检查是否启用了 JavaScript
+   - 清除浏览器缓存
 
 ### 问题 3: 任务创建失败
 

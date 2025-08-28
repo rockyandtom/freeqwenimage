@@ -61,24 +61,50 @@
           ]
         },
         {
-          "title": "AI特效",
-          "url": "/new-page/AI-EFFECTS",
-          "icon": "RiVideoLine",
+          "title": "照片特效",
+          "url": "/ai-tools/image/image-to-image/Photo-Effects",
+          "icon": "RiImageLine",
           "trigger": "hover",
           "highlightOnHover": true,
           "align": "center",
           "sideOffset": 4,
           "children": [
             {
-              "title": "AI亲吻视频生成器",
-              "url": "/new-page/AI-EFFECTS",
-              "description": "创建令人惊艳的AI亲吻视频特效"
+              "title": "Nano Banana动漫人物生成器",
+              "url": "/ai-tools/image/image-to-image/Photo-Effects",
+              "description": "使用AI驱动的Nano Banana生成器创建精美动漫人物"
             }
           ]
         },
         {
-          "title": "图片编辑器",
-          "url": "/new-page/image-editor",
+          "title": "AI工具",
+          "url": "/ai-tools",
+          "icon": "RiToolsLine",
+          "trigger": "hover",
+          "highlightOnHover": true,
+          "align": "center",
+          "sideOffset": 4,
+          "children": [
+            {
+              "title": "所有AI工具",
+              "url": "/ai-tools",
+              "description": "探索我们完整的AI工具集合"
+            },
+            {
+              "title": "图像工具",
+              "url": "/ai-tools/image",
+              "description": "AI图像增强和转换工具"
+            },
+            {
+              "title": "视频工具",
+              "url": "/ai-tools/video",
+              "description": "AI视频创建和动画工具"
+            }
+          ]
+        },
+        {
+          "title": "热门工具",
+          "url": "/ai-tools/image/image-enhancer",
           "icon": "RiImageEditLine",
           "trigger": "hover",
           "highlightOnHover": true,
@@ -86,19 +112,19 @@
           "sideOffset": 4,
           "children": [
             {
-              "title": "AI水印去除工具",
-              "url": "/new-page/image-editor",
-              "description": "免费AI水印去除工具，轻松清理图片"
-            },
-            {
-              "title": "Qwen图片编辑",
-              "url": "/new-page/image-editor/qwen-image-edit",
-              "description": "使用Qwen技术的先进AI图片编辑"
-            },
-            {
               "title": "AI图片增强器",
-              "url": "/new-page/image-editor/AI-Image-Enhancer",
+              "url": "/ai-tools/image/image-enhancer",
               "description": "使用AI技术增强和提升图片质量"
+            },
+            {
+              "title": "图生图",
+              "url": "/ai-tools/image/image-to-image",
+              "description": "使用文本提示转换图像"
+            },
+            {
+              "title": "图生视频",
+              "url": "/ai-tools/video/image-to-video",
+              "description": "从静态图像创建动态视频"
             }
           ]
         }
@@ -221,6 +247,40 @@
       }
     ]
   },
+  "showcase": {
+    "name": "showcase",
+    "title": "我们的AI工具",
+    "description": "探索我们强大的AI工具，将您的创造力变为现实。",
+    "items": [
+      {
+        "title": "AI图像增强器",
+        "description": "使用AI技术增强和提升图像质量。",
+        "url": "/ai-tools/image/image-enhancer",
+        "image": {
+          "src": "/imgs/showcase/1.png",
+          "alt": "AI图像增强器"
+        }
+      },
+      {
+        "title": "图生图",
+        "description": "使用文本提示转换图像。",
+        "url": "/ai-tools/image/image-to-image",
+        "image": {
+          "src": "/imgs/showcase/2.png",
+          "alt": "图生图"
+        }
+      },
+      {
+        "title": "图生视频",
+        "description": "从静态图像创建动态视频。",
+        "url": "/ai-tools/video/image-to-video",
+        "image": {
+          "src": "/imgs/showcase/3.png",
+          "alt": "图生视频"
+        }
+      }
+    ]
+  },
   "stats": {
     "name": "stats",
     "label": "统计",
@@ -331,31 +391,51 @@
           ]
         },
         {
-          "title": "AI特效",
+          "title": "AI工具",
           "children": [
             {
-              "title": "AI亲吻视频生成器",
-              "url": "/new-page/AI-EFFECTS",
+              "title": "所有AI工具",
+              "url": "/ai-tools",
+              "target": "_self"
+            },
+            {
+              "title": "图像工具",
+              "url": "/ai-tools/image",
+              "target": "_self"
+            },
+            {
+              "title": "视频工具",
+              "url": "/ai-tools/video",
               "target": "_self"
             }
           ]
         },
         {
-          "title": "图片编辑器",
+          "title": "热门工具",
           "children": [
             {
-              "title": "AI水印去除工具",
-              "url": "/new-page/image-editor",
-              "target": "_self"
-            },
-            {
-              "title": "Qwen图片编辑",
-              "url": "/new-page/image-editor/qwen-image-edit",
-              "target": "_self"
-            },
-            {
               "title": "AI图片增强器",
-              "url": "/new-page/image-editor/AI-Image-Enhancer",
+              "url": "/ai-tools/image/image-enhancer",
+              "target": "_self"
+            },
+            {
+              "title": "图生图",
+              "url": "/ai-tools/image/image-to-image",
+              "target": "_self"
+            },
+            {
+              "title": "图生视频",
+              "url": "/ai-tools/video/image-to-video",
+              "target": "_self"
+            }
+          ]
+        },
+        {
+          "title": "Photo Effects",
+          "children": [
+            {
+              "title": "动漫手办生成器",
+              "url": "/ai-tools/image/image-to-image/Photo-Effects",
               "target": "_self"
             }
           ]

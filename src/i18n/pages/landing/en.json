@@ -61,6 +61,22 @@
           ]
         },
         {
+          "title": "Photo Effects",
+          "url": "/ai-tools/image/image-to-image/Photo-Effects",
+          "icon": "RiImageLine",
+          "trigger": "hover",
+          "highlightOnHover": true,
+          "align": "center",
+          "sideOffset": 4,
+          "children": [
+            {
+              "title": "Nano Banana Anime Figure Generator",
+              "url": "/ai-tools/image/image-to-image/Photo-Effects",
+              "description": "Create stunning anime figures with AI-powered Nano Banana generator"
+            }
+          ]
+        },
+        {
           "title": "AI EFFECTS",
           "url": "/new-page/AI-EFFECTS",
           "icon": "RiVideoLine",
@@ -377,6 +393,16 @@
             {
               "title": "AI Image Enhancer",
               "url": "/new-page/image-editor/AI-Image-Enhancer",
+              "target": "_self"
+            }
+          ]
+        },
+        {
+          "title": "Photo Effects",
+          "children": [
+            {
+              "title": "Anime Figure Generator",
+              "url": "/ai-tools/image/image-to-image/Photo-Effects",
               "target": "_self"
             }
           ]
